@@ -22391,6 +22391,38 @@ try{if(window.__vlRestauriert)setTimeout(()=>{try{toast('Spielstand aus der Sich
 try{if(STORY_INTRO.length===7){const k=STORY_INTRO.findIndex(l=>l[0]==='bolt');if(k>0)STORY_INTRO.splice(k,1)}}catch(e){}
 /* ---------- Erster Einsatz fair: solange Level 1 noch nie geschafft ist, 2 Zusatzleben und 8 s Startschild ---------- */
 try{const _wRs=reset;reset=function(a,b,opts){const r=_wRs.apply(this,arguments);try{if(opts&&opts.camp&&opts.camp.n===1&&((save.camp&&save.camp.lv)||1)===1){st.hp+=2;lives=st.hp;dome=Math.max(dome,8);run.wowHilfe=1}}catch(e){}return r}}catch(e){}
+/* ---------- Erstes Intro nicht aus Versehen überspringen (Handy: „Überspringen“ lag mitten im Tippbereich) ---------- */
+const WOWSK={an:false,scharf:0,ab:0,t:0};
+function wowSkipLage(an){try{const s=document.getElementById('dlgSkip');if(!s)return;const P=['position','top','right','bottom','left','opacity','pointer-events','transition','font-size','min-height','padding','z-index'];
+  if(!an){P.forEach(p=>s.style.removeProperty(p));s.classList.remove('wowSkW');if(WOWSK.par&&s.parentElement!==WOWSK.par){try{WOWSK.par.insertBefore(s,WOWSK.nach&&WOWSK.nach.parentElement===WOWSK.par?WOWSK.nach:null)}catch(_){}}return}
+  const ov=document.getElementById('dlgOv');if(ov&&s.parentElement!==ov){WOWSK.par=s.parentElement;WOWSK.nach=s.nextSibling;ov.appendChild(s)}s.style.setProperty('z-index','5','important');
+  const z=performance.now()>=WOWSK.ab,v={position:'fixed',top:'calc(env(safe-area-inset-top) + 10px)',right:'calc(env(safe-area-inset-right) + 12px)',bottom:'auto',left:'auto',opacity:z?'.7':'0','pointer-events':z?'auto':'none',transition:'none','font-size':'12px','min-height':'44px',padding:'0 14px'};
+  for(const k in v)s.style.setProperty(k,v[k],'important')}catch(e){}}
+function wowSkipTick(){try{const o=document.getElementById('dlgOv'),offen=o&&!o.classList.contains('hide'),neu=!stS().intro;
+  if(offen&&neu){if(!WOWSK.an){WOWSK.an=true;WOWSK.ab=performance.now()+4000}wowSkipLage(true)}else if(WOWSK.an){WOWSK.an=false;WOWSK.scharf=0;wowSkipLage(false)}}catch(e){}}
+setInterval(wowSkipTick,250);
+document.addEventListener('click',e=>{try{if(!WOWSK.an)return;const s=e.target&&e.target.closest&&e.target.closest('#dlgSkip');if(!s)return;
+  if(performance.now()<WOWSK.ab||!WOWSK.scharf||performance.now()-WOWSK.scharf>3000){e.preventDefault();e.stopImmediatePropagation();WOWSK.scharf=performance.now();
+    const t=s.textContent;s.textContent='Nochmal tippen zum Überspringen';clearTimeout(WOWSK.t);WOWSK.t=setTimeout(()=>{try{s.textContent=t;WOWSK.scharf=0}catch(_){}},3000)}}catch(_){}},true);
+/* Intro-Musik auf iPhone: Ton darf erst nach einer echten Berührung starten – auch Loslassen/Tippen zählt */
+try{const _wIA=wowIntroAn;wowIntroAn=function(){const r=_wIA.apply(this,arguments);try{const a=WOW.im;if(a){const st2=()=>{if(WOW.an||WOW.aus)return;const p=a.play();if(p&&p.then)p.then(()=>{WOW.an=true;try{Sound.own(true)}catch(e){}wowFade(wowVol(),1.6)}).catch(()=>{})};
+  const h=()=>{st2();if(WOW.an||WOW.aus){removeEventListener('pointerup',h,true);removeEventListener('touchend',h,true);removeEventListener('click',h,true)}};addEventListener('pointerup',h,true);addEventListener('touchend',h,true);addEventListener('click',h,true)}}catch(e){}return r}}catch(e){}
+/* ---------- Kampf-Beat: der Ansager-Song (musik/mus_kampf.mp3) läuft in jedem Flug, in Schleife, nach Musik-Lautstärke ---------- */
+const KBEAT={a:null,an:false,fehler:0,iv:0,ziel:0,v:0,n:0};
+function kbeatAus(){return /[?&](musik=aus|beat=aus)\b/.test(location.search)}
+function kbeatTick(){try{if(kbeatAus()||KBEAT.fehler)return;let fl=false,pz=false;try{fl=state==='play'||state==='dying'||state==='revive'||state==='pick';pz=state==='pause'}catch(e){}
+  let eigen=false;try{eigen=!!(MyMusic.on&&MyMusic.tracks.length)}catch(e){}
+  const vol=eigen?0:wowVol();let ziel=0;if(fl)ziel=vol;else if(pz)ziel=vol*.3;
+  try{if(ziel>0&&typeof ANS==='object'&&ANS.busy)ziel*=.55}catch(e){}
+  if(ziel>0&&!KBEAT.a){const a=new Audio('musik/mus_kampf.mp3');a.preload='auto';a.loop=false;a.volume=0;a.onerror=()=>{KBEAT.fehler=1;try{Sound.own(false)}catch(e){}};
+    a.addEventListener('timeupdate',()=>{try{if(a.duration&&a.currentTime>a.duration-1.25){a.currentTime=0.05;KBEAT.n++}}catch(e){}});a.onended=()=>{try{a.currentTime=0;a.play().catch(()=>{})}catch(e){}};KBEAT.a=a}
+  const a=KBEAT.a;if(!a)return;
+  if(ziel>0){if(a.paused){const p=a.play();if(p&&p.then)p.then(()=>{KBEAT.an=true}).catch(()=>{})}if(!eigen&&!KBEAT.own){KBEAT.own=1;try{Sound.own(true)}catch(e){}}}
+  KBEAT.v+=(ziel-KBEAT.v)*(ziel>KBEAT.v?.12:.08);if(Math.abs(KBEAT.v-ziel)<.004)KBEAT.v=ziel;try{a.volume=Math.max(0,Math.min(1,KBEAT.v))}catch(e){}
+  if(ziel===0&&KBEAT.v===0&&!a.paused){try{a.pause()}catch(e){}KBEAT.an=false;if(KBEAT.own){KBEAT.own=0;if(!eigen&&!WOW.an)try{Sound.own(false)}catch(e){}}}}catch(e){}}
+KBEAT.iv=setInterval(kbeatTick,100);
+document.addEventListener('visibilitychange',()=>{try{if(document.hidden&&KBEAT.a)KBEAT.a.pause()}catch(e){}});
+try{const _vw=window.__vlWow;window.__vlWow=function(){const r=_vw?_vw.apply(this,arguments):{};try{r.beat={an:KBEAT.an,lautst:+KBEAT.v.toFixed(2),schleifen:KBEAT.n,fehler:KBEAT.fehler};r.skipSchutz=WOWSK.an}catch(e){}return r}}catch(e){}
 
 /* ---------- Early Access „App“ (Modul app) ---------- */
 /* 1.0 Early Access: kostenlos, keine Werbung, kein Werbenetzwerk, kein Tracking.
@@ -22471,6 +22503,8 @@ window.__vlApp=function(){return{app:!!VLAPP.bruecke(),werbefrei:appAktiv(),prei
 /* Werbefrei + Käufe wiederherstellen immer erreichbar: Einstellungen → Info (der Shop öffnet sich für Neulinge erst später) */
 try{const _vi3=STG_VIEW.info;STG_VIEW.info=function(){let k='';try{const on=appAktiv();k=`<div class="setRow stg vlKaufZ">${ic('noads')}<span>Werbefrei<small>Einziger Echtgeld-Kauf: Doppelbelohnung automatisch, ohne Bonus-Funk</small></span>${on?'<b class="stgPct">Aktiv</b>':`<button class="vlKaufB" data-vlkauf="kauf" type="button">${appPreis()}</button>`}</div><p class="note stgN" style="text-align:center"><button class="vlKaufB vlKaufR" data-vlkauf="restore" type="button">Käufe wiederherstellen</button></p>`}catch(e){}return k+_vi3.apply(this,arguments)}}catch(e){}
 document.addEventListener('click',e=>{const b=e.target&&e.target.closest&&e.target.closest('[data-vlkauf]');if(!b)return;e.preventDefault();e.stopPropagation();try{Sound.click()}catch(_){}try{b.dataset.vlkauf==='kauf'?appKaufDlg():appRestore()}catch(_){}},true);
+/* Ladebildschirm-Tipp: keine Werbung mehr */
+try{LDTIP.all=LDTIP.all.map(t=>/Werbevideos sind freiwillig/.test(t)?'Keine Werbung. Der Bonus-Funk ist freiwillig.':t)}catch(e){}
 
 /* ---------- Lobby „Kommandodeck“ (lpa2): neue Anordnung der Lobby – Fußzeile Rüsten · Modus · Start, Stufenleiter mit Liste, Fächer „Mehr“ ---------- */
 /* Schalter: Klasse lpA2 an <html> (Standard AN). Mit ?lobby=alt bleibt sie aus → heutige Lobby, dieses Modul tut dann nichts.
