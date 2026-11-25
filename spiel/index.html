@@ -6082,6 +6082,50 @@ body.sha .n9RealB{background:linear-gradient(180deg,#ffe08a 0%,#f2b84b 55%,#d98f
 body.sha .n9RealB .pgCur{background:rgba(29,18,4,.18)!important;color:#1d1204!important}
 }
 
+/* ---------- Kasino 3D (kasino3d): Bedienleiste am 3D-Automaten, Gewinnanzeige, Hologramm-Stationen ---------- */
+html body #c3Ov .k3dBar{position:absolute;left:10px;right:10px;bottom:calc(10px + env(safe-area-inset-bottom,0px));margin:0 auto;max-width:560px;z-index:6;display:flex;flex-direction:column;gap:6px;padding:8px 10px 7px;border-radius:18px;background:linear-gradient(180deg,rgba(18,12,34,.82),rgba(6,4,16,.93));border:1px solid rgba(255,209,102,.38);box-shadow:0 12px 30px rgba(0,0,0,.55),0 0 22px rgba(255,170,60,.14);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+html body #c3Ov .k3dBar.hide,html body #c3Ov .k3dTop.hide,html body #casOv .k3dHB.hide,html body #c3Ov .k3dGam.hide{display:none}
+html body #c3Ov .k3dInfo{display:flex;gap:6px}
+html body #c3Ov .k3dInfo span{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;font-size:10px;letter-spacing:.05em;text-transform:uppercase;color:rgba(230,220,255,.7)}
+html body #c3Ov .k3dInfo b{font-size:15px;letter-spacing:0;text-transform:none;color:#fff;font-variant-numeric:tabular-nums;white-space:nowrap}
+html body #c3Ov .k3dInfo .won b{color:#7fffb0;text-shadow:0 0 10px rgba(127,255,176,.6)}
+html body #c3Ov .k3dCtl{display:flex;gap:8px;align-items:stretch}
+html body #c3Ov .k3dB{min-width:48px;min-height:48px;padding:0 10px;border-radius:14px;font-size:22px;line-height:1;display:inline-flex;align-items:center;justify-content:center;gap:4px;touch-action:manipulation}
+html body #c3Ov .k3dB .ic{width:20px;height:20px}
+html body #c3Ov .k3dSpin{flex:1;min-width:0;min-height:54px;border-radius:16px;font-size:17px;font-weight:800;letter-spacing:.05em;display:inline-flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap;touch-action:manipulation}
+html body #c3Ov .k3dSpin:disabled,html body #c3Ov .k3dB:disabled{opacity:.42}
+html body #c3Ov .k3dGam{min-height:44px;width:100%}
+html body #c3Ov .k3dMsg{margin:0;min-height:15px;text-align:center;font-size:11.5px;line-height:1.3;color:rgba(235,225,255,.82)}
+html body #c3Ov .k3dTop{position:absolute;top:8px;left:8px;right:8px;z-index:6;display:flex;align-items:center;gap:6px}
+html body #c3Ov .k3dTop .k3dB{font-size:14px;font-weight:800;min-width:44px;min-height:44px;background:rgba(10,6,22,.72)}
+html body #c3Ov .k3dJp{display:flex;flex-direction:column;align-items:flex-start;padding:4px 10px;border-radius:12px;background:rgba(10,6,22,.74);border:1px solid rgba(255,209,102,.42)}
+html body #c3Ov .k3dJp small{font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#ffd166}
+html body #c3Ov .k3dJp b{font-size:14px;color:#fff;font-variant-numeric:tabular-nums}
+html body #c3Ov .k3dName{flex:1;min-width:0;text-align:center;font-weight:800;font-size:14px;color:#fff;text-shadow:0 0 12px rgba(120,220,255,.6),0 1px 2px #000;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+html body #c3Ov.k3dOn #c3Act,html body #c3Ov.k3dOn #c3Tags,html body #c3Ov.k3dOn .c3Hint,html body #c3Ov.k3dOn #c3Joy,html body #c3Ov.k3dOn #chBtn,html body #c3Ov.k3dOn #chPick,html body #c3Ov.k3dOn .c3Pop{display:none!important}
+html body #c3Ov .k3dWinTx{position:absolute;left:50%;top:30%;z-index:5;pointer-events:none;opacity:0;transform:translate(-50%,-100%);display:flex;flex-direction:column;align-items:center;white-space:nowrap}
+html body #c3Ov .k3dWinTx.on{animation:k3dWin 2.4s cubic-bezier(.2,.8,.2,1) forwards}
+html body #c3Ov .k3dWinTx.l3.on{animation-duration:3.4s}
+html body #c3Ov .k3dWinTx b{font:900 34px/1.05 system-ui,sans-serif;color:#ffe08a;background:linear-gradient(180deg,#fff6c8,#ffc84a 55%,#ff8a2a);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 10px rgba(255,190,60,.75)) drop-shadow(0 2px 0 rgba(0,0,0,.6))}
+html body #c3Ov .k3dWinTx.l2 b{font-size:44px}
+html body #c3Ov .k3dWinTx.l3 b{font-size:52px;background:linear-gradient(90deg,#ff6ad5,#ffd166,#7fffb0,#6ac8ff,#c77dff);-webkit-background-clip:text;background-clip:text}
+html body #c3Ov .k3dWinTx small{margin-top:5px;max-width:88vw;overflow:hidden;text-overflow:ellipsis;font-size:12px;font-weight:700;color:#fff;text-shadow:0 1px 3px #000,0 0 10px rgba(255,200,90,.6);padding:2px 10px;border-radius:10px;background:rgba(10,6,22,.58)}
+@keyframes k3dWin{0%{opacity:0;transform:translate(-50%,-80%) scale(.4)}12%{opacity:1;transform:translate(-50%,-100%) scale(1.15)}24%{opacity:1;transform:translate(-50%,-100%) scale(1)}78%{opacity:1;transform:translate(-50%,-135%) scale(1)}100%{opacity:0;transform:translate(-50%,-160%) scale(.96)}}
+@media (orientation:landscape) and (max-height:520px){html body #c3Ov .k3dBar{left:auto;right:10px;width:min(330px,46vw);max-width:none;bottom:calc(8px + env(safe-area-inset-bottom,0px))}html body #c3Ov .k3dTop{right:auto;width:calc(54vw - 24px)}html body #c3Ov .k3dInfo b{font-size:13px}}
+/* Hologramm-Stationen: 3D-Station oben (Hochformat) bzw. links (Querformat), Spiel-Oberflaeche als Hologramm-Tafel */
+html body #casOv.k3dHolo>#c3Ov{z-index:1}
+html body #casOv.k3dHolo #casBody{position:relative;z-index:2;visibility:visible!important;background:transparent!important;isolation:isolate}
+html body #casOv.k3dHolo:not(.k3dLand) #casBody{padding-top:var(--k3dTop,36%)!important}
+html body #casOv.k3dHolo.k3dLand #casBody{padding-left:var(--k3dLeft,44%)!important}
+html body #casOv.k3dHolo #casBody::before{content:"";position:absolute;left:6px;right:6px;top:calc(var(--k3dTop,36%) - 6px);bottom:4px;z-index:-1;pointer-events:none;border-radius:18px;border:1px solid rgba(120,225,255,.55);background:repeating-linear-gradient(0deg,rgba(130,225,255,.05) 0 1px,transparent 1px 4px),linear-gradient(180deg,rgba(40,170,255,.22),rgba(6,16,36,.8) 14%,rgba(4,10,24,.9));box-shadow:0 0 26px rgba(60,190,255,.35),inset 0 0 34px rgba(60,190,255,.14);transform-origin:50% 0;animation:k3dHoloIn .45s ease-out both}
+html body #casOv.k3dHolo.k3dLand #casBody::before{top:6px;left:calc(var(--k3dLeft,44%) - 6px);transform-origin:0 50%}
+html body #casOv.k3dHolo[data-t="rl"] .rlWheelBox{display:none}
+html body #casOv.k3dHolo #c3Act,html body #casOv.k3dHolo #c3Tags,html body #casOv.k3dHolo .c3Hint,html body #casOv.k3dHolo #chBtn,html body #casOv.k3dHolo #chPick,html body #casOv.k3dHolo .c3Pop{display:none!important}
+html body #casOv .k3dHB{position:absolute;left:10px;top:120px;z-index:30;min-width:44px;min-height:44px;padding:0 14px;border-radius:14px;display:inline-flex;align-items:center;gap:6px;font-weight:700;background:rgba(8,14,30,.78);border:1px solid rgba(120,220,255,.55);color:#dff6ff;box-shadow:0 0 14px rgba(60,190,255,.3)}
+html body #casOv .k3dHB .ic{width:18px;height:18px}
+html body #casOv>.casPop{z-index:40}
+@keyframes k3dHoloIn{0%{opacity:0;transform:scaleY(.04)}60%{opacity:1}100%{opacity:1;transform:none}}
+
 /* ---------- Release: Testmodus aus ---------- */
 html body [data-a="devunlock"]{display:none!important}
 html body .card:has(>[data-a="devunlock"]),html body .card:has([data-a="devunlock"]){display:none!important}
@@ -23898,6 +23942,295 @@ window.__vlTempo=function(){const k=ST[S.stufe]||ST[0],C=S.cache;let pc=null,f3=
     ruckler:S.ruck,wechsel:S.log.slice(),fehler:S.fehler,letzterFehler:S.letzterFehler}};
 window.__vlTempo.stufe=function(n){S.fix=n==null?null:Math.max(0,Math.min(3,n|0));if(S.fix!==null&&S.inLauf)setStufe(S.fix,'manuell');return window.__vlTempo()};
 })();
+
+/* ---------- Kasino 3D (kasino3d): Themenhalle mit echten 3D-Slotmaschinen (Walzen drehen am Automaten, Hebel, Lichtshow) und 3D-Stationen fuer Roulette, Blackjack, Poker, Kasse, Praemien. Spiellogik (auSpin/auEnd, rlSpin, Tische) bleibt unveraendert, nur Darstellung/Bedienung. Rueckfall: ?kasino=alt ---------- */
+var K3D={off:false,dead:false,err:0,errMsg:'',mode:null,mach:null,holo:null,tgt:null,reg:null,hreg:null,regT:0,cb:0,ct:0,going:0,anim:null,lever:null,show:{k:'idle'},autoT:0,shake:0,pend:null,tapHit:null,pd:null,wt:null,t:0,last:0,uiT:0,hook:false,go0:null,art:{},sh:{}};
+try{K3D.off=/[?&]kasino=alt\b/i.test(location.search)}catch(e){}
+const K3D_PAL=[0x38e0ff,0xffc04a,0xb86cff,0xff4a9a,0x7dff8a,0xff8a3a,0x6a9cff,0xc0ff4a,0x4affd2,0xffd76a,0xff6aff];
+const K3D_HOLO={rl:1,bj:1,pk:1,swap:1,prize:1},K3D_N=12,K3D_AW=112,K3D_AH=88;
+const k3dRM=()=>{try{return matchMedia('(prefers-reduced-motion:reduce)').matches}catch(e){return false}};
+const k3dTx=(de,en)=>{try{return save.set.lang==='en'?en:de}catch(e){return de}};
+const k3dOk=()=>!K3D.off&&!K3D.dead&&typeof THREE!=='undefined'&&typeof CH!=='undefined'&&CH.act&&!!CH.cur&&!!CH.cur.k3d;
+function k3dErr(e){K3D.err++;K3D.errMsg=String(e&&e.message||e).slice(0,160);if(K3D.err<=3)try{console.warn('kasino3d',e)}catch(_){}if(K3D.err>=6&&!K3D.dead){K3D.dead=true;try{k3dExit(true)}catch(_){}}}
+function k3dSh(){const S=K3D.sh;if(S.ok)return S;Object.assign(S,{ok:1,v1:new THREE.Vector3(),v2:new THREE.Vector3(),v3:new THREE.Vector3(),up:new THREE.Vector3(0,1,0),m4:new THREE.Matrix4(),m5:new THREE.Matrix4(),q1:new THREE.Quaternion(),e1:new THREE.Euler(),c1:new THREE.Color(),one:new THREE.Vector3(1,1,1),Z:new THREE.Matrix4().makeScale(0,0,0),ray:new THREE.Raycaster(),lr:new THREE.Ray(),n2:new THREE.Vector2(),sp:new THREE.Sphere()});return S}
+function k3dT(x,y,z,rx,ry,rz){return new THREE.Matrix4().compose(new THREE.Vector3(x,y,z),new THREE.Quaternion().setFromEuler(new THREE.Euler(rx||0,ry||0,rz||0)),k3dSh().one)}
+function k3dCv(w,h){const c=document.createElement('canvas');c.width=w;c.height=h;return c}
+function k3dTex(c){const t=new THREE.CanvasTexture(c);t.encoding=THREE.sRGBEncoding;return t}
+// Mehrere Teile mit Vertexfarben zu einer Geometrie (1 Draw-Call)
+function k3dMerge(parts){let n=0;const gs=parts.map(([g,c,m])=>{const q=g.index?g.toNonIndexed():g;if(q!==g)g.dispose();if(m)q.applyMatrix4(m);n+=q.attributes.position.count;return[q,new THREE.Color(c)]});
+  const P=new Float32Array(n*3),N=new Float32Array(n*3),C=new Float32Array(n*3);let o=0;
+  for(const[q,c]of gs){const k=q.attributes.position.count;P.set(q.attributes.position.array,o*3);N.set(q.attributes.normal.array,o*3);for(let i=0;i<k;i++){C[(o+i)*3]=c.r;C[(o+i)*3+1]=c.g;C[(o+i)*3+2]=c.b}o+=k;q.dispose()}
+  const g=new THREE.BufferGeometry();g.setAttribute('position',new THREE.BufferAttribute(P,3));g.setAttribute('normal',new THREE.BufferAttribute(N,3));g.setAttribute('color',new THREE.BufferAttribute(C,3));g.computeBoundingSphere();return g}
+// Gehaeuse ohne Vorderseite (dort sitzt die Bildfront mit Walzenfenster)
+function k3dOpenBox(w,h,d){const g=new THREE.BoxGeometry(w,h,d).toNonIndexed(),o=new THREE.BufferGeometry();for(const k of['position','normal']){const a=g.attributes[k].array,r=new Float32Array(a.length-18);r.set(a.subarray(0,72));r.set(a.subarray(90),72);o.setAttribute(k,new THREE.BufferAttribute(r,3))}g.dispose();return o}
+function k3dMats(){if(K3D.mStat)return;K3D.mStat=new THREE.MeshStandardMaterial({vertexColors:true,metalness:.55,roughness:.38,side:THREE.DoubleSide});
+  K3D.levGeo=k3dMerge([[new THREE.CylinderGeometry(.016,.016,.42,10),0xb8c0cc,k3dT(0,.21,0)],[new THREE.SphereGeometry(.052,14,10),0xe0203a,k3dT(0,.44,0)],[new THREE.SphereGeometry(.034,12,8),0x9aa3b0,null]])}
+/* ---------- geteilte Canvas-Texturen ---------- */
+function k3dGlassTx(){if(K3D.gt)return K3D.gt;const c=k3dCv(16,128),g=c.getContext('2d'),gr=g.createLinearGradient(0,0,0,128);gr.addColorStop(0,'rgba(0,0,0,.82)');gr.addColorStop(.27,'rgba(0,0,0,0)');gr.addColorStop(.73,'rgba(0,0,0,0)');gr.addColorStop(1,'rgba(0,0,0,.82)');g.fillStyle=gr;g.fillRect(0,0,16,128);g.fillStyle='rgba(255,80,80,.3)';g.fillRect(0,60,16,8);g.fillStyle='rgba(255,215,120,.95)';g.fillRect(0,63,16,2);return K3D.gt=k3dTex(c)}
+function k3dFrameTx(){if(K3D.ft)return K3D.ft;const c=k3dCv(128,96),g=c.getContext('2d'),rr=(x,y,w,h,q)=>{g.beginPath();g.moveTo(x+q,y);g.arcTo(x+w,y,x+w,y+h,q);g.arcTo(x+w,y+h,x,y+h,q);g.arcTo(x,y+h,x,y,q);g.arcTo(x,y,x+w,y,q);g.closePath()};
+  g.strokeStyle='#fff';g.shadowColor='#fff';g.shadowBlur=9;g.lineWidth=3;rr(10,11,108,74,9);g.stroke();g.globalAlpha=.45;g.lineWidth=1.2;g.shadowBlur=3;rr(5,6,118,84,13);g.stroke();return K3D.ft=k3dTex(c)}
+function k3dRadTx(){if(K3D.rt)return K3D.rt;const c=k3dCv(64,64),g=c.getContext('2d'),gr=g.createRadialGradient(32,32,0,32,32,32);gr.addColorStop(0,'rgba(255,255,255,1)');gr.addColorStop(.22,'rgba(255,255,255,.6)');gr.addColorStop(1,'rgba(255,255,255,0)');g.fillStyle=gr;g.fillRect(0,0,64,64);return K3D.rt=k3dTex(c)}
+/* ---------- Automaten-Bilder (vorhandene Slot-Grafiken --au-<id>) ---------- */
+function k3dSrc(id){try{const v=getComputedStyle(document.documentElement).getPropertyValue('--au-'+id)||'',m=/url\(\s*(['"]?)([\s\S]*?)\1\s*\)/.exec(v);return m?m[2].trim():null}catch(e){return null}}
+function k3dHole(g,M,w,h){const[wx,wy,ww,wh]=M.W;g.clearRect(Math.round(wx*w),Math.round(wy*h),Math.round(ww*w),Math.round(wh*h))}
+function k3dArtDraw(cv,M,im){const g=cv.getContext('2d'),w=cv.width,h=cv.height;g.clearRect(0,0,w,h);g.drawImage(im,0,0,w,h);const gr=g.createLinearGradient(0,h*.86,0,h);gr.addColorStop(0,'rgba(9,7,15,0)');gr.addColorStop(1,'rgba(9,7,15,.96)');g.fillStyle=gr;g.fillRect(0,Math.floor(h*.86),w,Math.ceil(h*.14));k3dHole(g,M,w,h)}
+function k3dArt(i){const M=AUTOS[i];let A=K3D.art[M.id];if(A)return A;const cv=k3dCv(192,Math.round(192/M.ar)),g=cv.getContext('2d');g.fillStyle='#09070f';g.fillRect(0,0,cv.width,cv.height);k3dHole(g,M,cv.width,cv.height);
+  A=K3D.art[M.id]={M,i,cv,tx:k3dTex(cv),ready:false,atlas:null,col:new THREE.Color(K3D_PAL[i%K3D_PAL.length]),idle:null,name:null};A.tx.anisotropy=4;
+  A.idleCv=k3dCv(K3D_N*40,3*52);k3dIdlePaint(A);A.idle=k3dTex(A.idleCv);A.nameCv=k3dCv(256,48);k3dNamePaint(A);A.name=k3dTex(A.nameCv);
+  A.idleMat=new THREE.MeshBasicMaterial({map:A.idle,toneMapped:false,color:0xdedede});A.nameMat=new THREE.MeshBasicMaterial({map:A.name,toneMapped:false});
+  const src=k3dSrc(M.id);if(src){const im=new Image();im.onload=()=>{try{k3dArtFill(A,im)}catch(e){k3dErr(e)}};im.src=src}return A}
+function k3dArtFill(A,im){const M=A.M,IW=im.naturalWidth||im.width,IH=im.naturalHeight||im.height;k3dArtDraw(A.cv,M,im);A.tx.needsUpdate=true;
+  const n=M.S.length,at=k3dCv(K3D_AW*n,K3D_AH),g=at.getContext('2d'),[wx,wy,ww,wh]=M.W,cw=ww/3,ch=wh/3;
+  for(let s=0;s<n;s++){const[c,r]=M.S[s];g.drawImage(im,(wx+c*cw)*IW,(wy+r*ch)*IH,cw*IW,ch*IH,s*K3D_AW,0,K3D_AW,K3D_AH)}A.atlas=at;
+  try{const d=A.cv.getContext('2d').getImageData(0,0,A.cv.width,A.cv.height).data,c=new THREE.Color(),hsl={};let r=0,gg=0,b=0,k=0;
+    for(let p=0;p<d.length;p+=28){if(d[p+3]<200)continue;c.setRGB(d[p]/255,d[p+1]/255,d[p+2]/255);c.getHSL(hsl);if(hsl.s>.55&&hsl.l>.35&&hsl.l<.8){r+=c.r;gg+=c.g;b+=c.b;k++}}
+    if(k>30){c.setRGB(r/k,gg/k,b/k);c.getHSL(hsl);A.col.setHSL(hsl.h,Math.min(1,hsl.s*1.3+.15),.58)}}catch(e){}
+  A.ready=true;k3dIdlePaint(A);k3dNamePaint(A)}
+// Ein Walzenfeld: Symbol um 90 Grad gedreht (Umfang = Canvas-x, Walzenachse = Canvas-y)
+function k3dSlot(g,A,k,s,y0,hc,S){const x=k*S;g.fillStyle='#08121c';g.fillRect(x,y0,S,hc);g.save();g.translate(x+S/2,y0+hc/2);g.rotate(Math.PI/2);
+  if(A.atlas)g.drawImage(A.atlas,s*K3D_AW,0,K3D_AW,K3D_AH,-hc/2,-S/2,hc,S);
+  else{g.fillStyle='#bfefff';g.font='700 '+Math.round(S*.3)+'px system-ui,sans-serif';g.textAlign='center';g.textBaseline='middle';g.fillText(String(A.M.S[s][2]).slice(0,8),0,0,hc*.92)}
+  g.restore();g.fillStyle='rgba(0,0,0,.3)';g.fillRect(x,y0,1,hc)}
+function k3dIdlePaint(A){const c=A.idleCv,g=c.getContext('2d'),S=40,H=52;for(let b=0;b<3;b++)for(let k=0;k<K3D_N;k++)k3dSlot(g,A,k,auRoll(A.M),b*H,H,S);g.fillStyle='rgba(0,0,0,.9)';for(let b=1;b<3;b++)g.fillRect(0,b*H-2,c.width,4);if(A.idle)A.idle.needsUpdate=true}
+function k3dNamePaint(A){const g=A.nameCv.getContext('2d'),col='#'+A.col.getHexString(),gr=g.createLinearGradient(0,0,0,48);gr.addColorStop(0,'#1c1529');gr.addColorStop(1,'#07050c');g.fillStyle=gr;g.fillRect(0,0,256,48);g.strokeStyle=col;g.lineWidth=2;g.strokeRect(3,3,250,42);
+  g.font='800 21px system-ui,sans-serif';g.textAlign='center';g.textBaseline='middle';g.shadowColor=col;g.shadowBlur=10;g.fillStyle='#fff';g.fillText(A.M.n.toUpperCase(),128,25,236);g.shadowBlur=0;if(A.name)A.name.needsUpdate=true}
+/* ---------- GLB-Automaten der Halle ausblenden (InstancedMesh-Matrizen auf 0) ---------- */
+function k3dHideMap(W){const map=new Map(),mm=new THREE.Matrix4();for(const o of W.sc.children){if(!o.isInstancedMesh)continue;for(let i=0;i<o.count;i++){o.getMatrixAt(i,mm);const e=mm.elements,k=Math.round(e[12]*100)+','+Math.round(e[13]*100)+','+Math.round(e[14]*100);let a=map.get(k);if(!a)map.set(k,a=[]);a.push([o,i,Float32Array.from(e)])}}return map}
+function k3dHideSlot(W,s,map){const ms=[];s.traverse(o=>{if(o.isMesh)ms.push(o)});if(!ms.length)return false;const hits=[];let miss=0;
+  for(const o of ms){const e=o.matrixWorld.elements,X=Math.round(e[12]*100),Y=Math.round(e[13]*100),Zk=Math.round(e[14]*100);let f=0;/* Nachbar-Faecher: float32-Instanzmatrix kann an der Rundungsgrenze in ein anderes Fach fallen */for(let dx=-1;dx<=1;dx++)for(let dy=-1;dy<=1;dy++)for(let dz=-1;dz<=1;dz++){const a=map.get((X+dx)+','+(Y+dy)+','+(Zk+dz));if(a)for(const h of a){if(hits.includes(h))continue;let ok=true;for(let j=0;j<16;j++)if(Math.abs(h[2][j]-e[j])>2e-3){ok=false;break}if(ok){hits.push(h);f=1}}}if(!f)miss++}W.k3dMiss=(W.k3dMiss||0)+miss;
+  if(!hits.length||miss>ms.length*.25)return false;const Z=k3dSh().Z;
+  for(const[im,i]of hits){im.setMatrixAt(i,Z);im.instanceMatrix.needsUpdate=true;for(const d of(W.dyn||[]))if(d.im===im&&d.l[i])d.l[i]={matrixWorld:Z}}return true}
+/* ---------- 3D-Slotmaschine ---------- */
+function k3dMach(W,o){const A=k3dArt(o.m),M=A.M,[wx,wy,ww,wh]=M.W;k3dMats();
+  let Hp=Math.max(1.4,Math.min(2.3,(o.h>1&&o.h<3.6?o.h:2.1)*.84));if(o.fw>.5&&Hp*M.ar>o.fw*1.06)Hp=Math.max(1.2,o.fw*1.06/M.ar);
+  const Wp=Hp*M.ar,base=.1,hw=wh*Hp,wwd=ww*Wp,r=hw/1.414,D=Math.max(.62,2*r+.1),zf=D/2,yc=base+Hp/2,wcx=(wx+ww/2-.5)*Wp,wcy=base+Hp*(1-wy-wh/2),top=base+Hp;
+  const g=new THREE.Group();g.position.set(o.x,o.y,o.z);g.rotation.y=o.ry;W.sc.add(g);
+  const dark=new THREE.Color(0x120e1a).lerp(A.col,.08).getHex(),gold=0xc9a24e;
+  g.add(new THREE.Mesh(k3dMerge([[k3dOpenBox(Wp+.06,Hp+.04,D),dark,k3dT(0,yc,0)],[new THREE.BoxGeometry(Wp+.2,base,D+.12),0x0b0910,k3dT(0,base/2,0)],[new THREE.BoxGeometry(Wp+.14,.05,D+.08),gold,k3dT(0,top+.045,0)],
+    [new THREE.BoxGeometry(Wp*.88,.22,.16),0x15101e,k3dT(0,top+.18,zf-.12)],[new THREE.BoxGeometry(.035,Hp,.035),gold,k3dT(-(Wp/2+.03),yc,zf)],[new THREE.BoxGeometry(.035,Hp,.035),gold,k3dT(Wp/2+.03,yc,zf)],
+    [new THREE.CylinderGeometry(.06,.06,.08,16),0x9aa3b0,k3dT(Wp/2+.07,wcy,0,0,0,Math.PI/2)]]),K3D.mStat));
+  const panel=new THREE.Mesh(new THREE.PlaneGeometry(Wp,Hp),new THREE.MeshBasicMaterial({map:A.tx,alphaTest:.5,toneMapped:false,color:0xe8e8e8}));panel.position.set(0,yc,zf+.003);g.add(panel);
+  const idle=new THREE.Mesh(new THREE.CylinderGeometry(r,r,wwd-.012,30,1,true).rotateZ(Math.PI/2),A.idleMat);idle.position.set(wcx,wcy,zf-.012-r);idle.rotation.x=(Math.floor(Math.random()*K3D_N)+.5)*TAU/K3D_N;g.add(idle);
+  const glass=new THREE.Mesh(new THREE.PlaneGeometry(wwd,hw),new THREE.MeshBasicMaterial({map:k3dGlassTx(),transparent:true,depthWrite:false,toneMapped:false}));glass.position.set(wcx,wcy,zf+.006);g.add(glass);
+  const frame=new THREE.Mesh(new THREE.PlaneGeometry(wwd*1.18,hw*1.3),new THREE.MeshBasicMaterial({map:k3dFrameTx(),transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,toneMapped:false,color:A.col}));frame.position.set(wcx,wcy,zf+.009);g.add(frame);
+  const nm=new THREE.Mesh(new THREE.PlaneGeometry(Wp*.82,.17),A.nameMat);nm.position.set(0,top+.18,zf-.036);g.add(nm);
+  const lever=new THREE.Group(),lm=new THREE.Mesh(K3D.levGeo,K3D.mStat);lever.add(lm);lever.position.set(Wp/2+.12,wcy,0);lever.rotation.x=-.18;g.add(lever);
+  const bl=[],n=9;for(let j=0;j<n;j++)bl.push(new THREE.Vector3(-(Wp/2+.03),base+.08+j*(Hp-.16)/(n-1),zf+.03));for(let j=0;j<6;j++)bl.push(new THREE.Vector3(-Wp/2+.06+j*(Wp-.12)/5,top+.075,zf+.02));for(let j=n-1;j>=0;j--)bl.push(new THREE.Vector3(Wp/2+.03,base+.08+j*(Hp-.16)/(n-1),zf+.03));
+  const box=new THREE.Box3(new THREE.Vector3(-Wp/2-.12,0,-D/2),new THREE.Vector3(Wp/2+.3,top+.32,zf+.06));
+  return{g,A,M,m:o.m,st:o.st,dir:o.dir,Hp,Wp,D,zf,wcx,wcy,hw,wwd,r,base,panel,idle,glass,frame,lever,bl,box,reels:null,ph:Math.random()*6,isp:null,nx:0,nb:0,b0:0}}
+/* ---------- Roulette-Kessel in 3D ---------- */
+function k3dWheelTx(){const c=k3dCv(512,512),g=c.getContext('2d'),C=256,n=37,st=TAU/n,R1=C*.7,R2=C*.985;g.fillStyle='#3a1a0c';g.fillRect(0,0,512,512);
+  for(let i=0;i<n;i++){const num=RLO[i],a0=i*st-st/2,a1=a0+st;g.beginPath();g.arc(C,C,R2,a0,a1);g.arc(C,C,R1,a1,a0,true);g.closePath();g.fillStyle=num===0?'#0f8a4a':RLRED.has(num)?'#c8203a':'#15151c';g.fill();
+    g.save();g.translate(C+Math.cos(i*st)*C*.885,C+Math.sin(i*st)*C*.885);g.rotate(i*st+Math.PI/2);g.fillStyle='#fff';g.font='700 19px system-ui,sans-serif';g.textAlign='center';g.textBaseline='middle';g.fillText(String(num),0,0);g.restore()}
+  g.strokeStyle='#d8b060';g.lineWidth=2;for(let i=0;i<n;i++){const a=i*st-st/2;g.beginPath();g.moveTo(C+Math.cos(a)*R1,C+Math.sin(a)*R1);g.lineTo(C+Math.cos(a)*R2,C+Math.sin(a)*R2);g.stroke()}
+  g.lineWidth=5;g.beginPath();g.arc(C,C,R1,0,TAU);g.stroke();g.beginPath();g.arc(C,C,R2-2,0,TAU);g.stroke();
+  const gr=g.createRadialGradient(C,C,10,C,C,R1);gr.addColorStop(0,'#8a5428');gr.addColorStop(1,'#3a1a0c');g.fillStyle=gr;g.beginPath();g.arc(C,C,R1-3,0,TAU);g.fill();
+  g.strokeStyle='#e8c070';g.lineWidth=6;for(let k=0;k<4;k++){const a=k*Math.PI/2;g.beginPath();g.moveTo(C+Math.cos(a)*22,C+Math.sin(a)*22);g.lineTo(C+Math.cos(a)*R1*.8,C+Math.sin(a)*R1*.8);g.stroke()}
+  const t=k3dTex(c);t.anisotropy=8;return t}
+function k3dWheel(W){const w0=W.wheel;if(!w0||typeof RLO==='undefined')return null;const p=w0.position,g=new THREE.Group();g.position.set(p.x,p.y-.065,p.z);
+  const pr=[[.47,.03],[.5,.045],[.55,.085],[.6,.11],[.66,.13],[.69,.12],[.69,0]].map(a=>new THREE.Vector2(a[0],a[1]));
+  const bowl=new THREE.Mesh(new THREE.LatheGeometry(pr,56),new THREE.MeshStandardMaterial({color:0x4a2210,metalness:.35,roughness:.42,side:THREE.DoubleSide}));
+  const rotor=new THREE.Group(),disc=new THREE.Mesh(new THREE.CircleGeometry(.47,74).rotateX(-Math.PI/2),new THREE.MeshStandardMaterial({map:k3dWheelTx(),metalness:.25,roughness:.45}));disc.position.y=.035;
+  const tur=new THREE.Mesh(k3dMerge([[new THREE.ConeGeometry(.07,.14,14),0xe0b860,k3dT(0,.11,0)],[new THREE.SphereGeometry(.028,10,8),0xf0d080,k3dT(0,.19,0)],[new THREE.CylinderGeometry(.012,.012,.3,8),0xe0b860,k3dT(0,.08,0,0,0,Math.PI/2)],[new THREE.CylinderGeometry(.012,.012,.3,8),0xe0b860,k3dT(0,.08,0,Math.PI/2,0,0)]]),new THREE.MeshStandardMaterial({vertexColors:true,metalness:1,roughness:.22}));
+  rotor.add(disc,tur);const ball=new THREE.Mesh(new THREE.SphereGeometry(.019,12,9),new THREE.MeshStandardMaterial({color:0xffffff,roughness:.15,metalness:.1,emissive:0x333333}));
+  g.add(bowl,rotor,ball);W.sc.add(g);w0.visible=false;let idx=null;try{if(RL.last!=null)idx=RLO.indexOf(RL.last)}catch(e){}return{g,rotor,ball,psi:0,idx,sp:null,ba:Math.random()*TAU}}
+function k3dWheelSpin(n,win){const R=CH.cur&&CH.cur.k3d,w=R&&R.wheel;if(!w)return;const rm=k3dRM();w.sp={t:0,T:rm?.2:4.2,p0:w.psi,E:rm?0:TAU*1.3,B:rm?0:TAU*6,idx:RLO.indexOf(n),win}}
+function k3dWheelTick(R,dt){const w=R.wheel,tr=.555,ty=.105,pr=.4,py=.058;let psi=w.psi+.35*dt,bA,bR,bY;
+  if(w.sp){const s=w.sp;s.t+=dt;const u=Math.min(1,s.t/s.T);psi=s.p0+.35*s.t+s.E*(1-(1-u)*(1-u));bA=s.idx*TAU/37-psi-s.B*Math.pow(1-u,2.5);
+    if(u<.62){bR=tr;bY=ty}else if(u<.88){const q=(u-.62)/.26,f=Math.max(0,1-q)*Math.abs(Math.cos(q*Math.PI*1.5));bR=pr+(tr-pr)*f;bY=py+(ty-py)*f}else{bR=pr;bY=py}
+    if(u>=1){w.idx=s.idx;w.sp=null;if(s.win>0&&R.fx){const S=k3dSh();k3dSparks(R.fx,S.v3.copy(w.g.position).setY(w.g.position.y+.12),40,1,null)}}}
+  else if(w.idx!=null&&w.idx>=0){bA=w.idx*TAU/37-psi;bR=pr;bY=py}else{bA=w.ba;bR=tr;bY=ty}
+  w.psi=psi;w.rotor.rotation.y=psi;w.ball.position.set(Math.cos(bA)*bR,bY,Math.sin(bA)*bR)}
+/* ---------- Effekte: Funken (Points), Muenzen (InstancedMesh), Lichthof ---------- */
+function k3dFxMake(sc){const N=160,pos=new Float32Array(N*3),col=new Float32Array(N*3),geo=new THREE.BufferGeometry();for(let i=0;i<N;i++)pos[i*3+1]=-50;
+  geo.setAttribute('position',new THREE.BufferAttribute(pos,3).setUsage(THREE.DynamicDrawUsage));geo.setAttribute('color',new THREE.BufferAttribute(col,3).setUsage(THREE.DynamicDrawUsage));
+  const pts=new THREE.Points(geo,new THREE.PointsMaterial({size:.075,map:k3dRadTx(),vertexColors:true,transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,toneMapped:false}));pts.frustumCulled=false;sc.add(pts);
+  const im=new THREE.InstancedMesh(new THREE.CylinderGeometry(.045,.045,.012,16),new THREE.MeshStandardMaterial({color:0xffc94a,metalness:1,roughness:.28,emissive:0x5a3a00,emissiveIntensity:.6}),40);im.count=0;im.frustumCulled=false;im.instanceMatrix.setUsage(THREE.DynamicDrawUsage);sc.add(im);
+  const halo=new THREE.Mesh(new THREE.PlaneGeometry(1,1),new THREE.MeshBasicMaterial({map:k3dRadTx(),transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,toneMapped:false,color:0}));halo.visible=false;sc.add(halo);
+  return{pts,pos,col,vel:new Float32Array(N*3),life:new Float32Array(N),ml:new Float32Array(N),bc:new Float32Array(N*3),N,ni:0,im,co:[],halo,ht:0,hl:1,dirty:false}}
+function k3dSparks(F,p,n,lvl,col){if(k3dRM())n=Math.min(n,10);const c=k3dSh().c1;for(let k=0;k<n;k++){const i=F.ni,j=i*3;F.ni=(F.ni+1)%F.N;const a=Math.random()*TAU,sp=(lvl>=2?2.6:1.8)*(.35+Math.random());
+  F.pos[j]=p.x;F.pos[j+1]=p.y;F.pos[j+2]=p.z;F.vel[j]=Math.cos(a)*sp*.7;F.vel[j+1]=1+Math.random()*2.2*(lvl>=2?1.35:1);F.vel[j+2]=Math.sin(a)*sp*.7;
+  if(lvl>=3)c.setHSL(Math.random(),1,.62);else if(col&&Math.random()<.45)c.copy(col);else c.setRGB(1,.78+Math.random()*.2,.3+Math.random()*.25);
+  F.bc[j]=c.r*1.4;F.bc[j+1]=c.g*1.4;F.bc[j+2]=c.b*1.4;F.ml[i]=F.life[i]=.8+Math.random()*.9}F.dirty=true}
+function k3dCoins(F,m,n){const S=k3dSh();for(let i=0;i<n;i++){let c=F.co.find(x=>x.life<=0);if(!c){if(F.co.length>=40)break;c={p:new THREE.Vector3(),v:new THREE.Vector3(),life:0};F.co.push(c)}
+  m.g.localToWorld(c.p.set(m.wcx+(Math.random()-.5)*m.wwd*.8,m.wcy-m.hw*.6,m.zf+.08));S.v1.set((Math.random()-.5)*1.6,1.5+Math.random()*2.4,.8+Math.random()*1.5).applyQuaternion(m.g.quaternion);
+  c.v.copy(S.v1);c.life=2.2+Math.random()*.8;c.fy=m.g.position.y+.008;c.a=Math.random()*6;c.b=Math.random()*6;c.w=8+Math.random()*10}}
+function k3dFxTick(F,dt){let any=false;for(let i=0;i<F.N;i++){if(F.life[i]<=0)continue;any=true;F.life[i]-=dt;const j=i*3;if(F.life[i]<=0){F.pos[j+1]=-50;F.col[j]=F.col[j+1]=F.col[j+2]=0;continue}
+    F.vel[j+1]-=3.2*dt;F.vel[j]*=.985;F.vel[j+2]*=.985;F.pos[j]+=F.vel[j]*dt;F.pos[j+1]+=F.vel[j+1]*dt;F.pos[j+2]+=F.vel[j+2]*dt;const f=F.life[i]/F.ml[i];F.col[j]=F.bc[j]*f;F.col[j+1]=F.bc[j+1]*f;F.col[j+2]=F.bc[j+2]*f}
+  if(any||F.dirty){const a=F.pts.geometry.attributes;a.position.needsUpdate=true;a.color.needsUpdate=true;F.dirty=any}
+  const S=k3dSh();let k=0;for(const c of F.co){if(c.life<=0)continue;c.life-=dt;c.v.y-=9.8*dt;c.p.addScaledVector(c.v,dt);if(c.p.y<c.fy){c.p.y=c.fy;c.v.y*=-.38;c.v.x*=.7;c.v.z*=.7;c.w*=.8}c.a+=c.w*dt;
+    S.e1.set(c.a,c.b,c.a*.7);S.q1.setFromEuler(S.e1);const s=Math.max(0,Math.min(1,c.life*2));S.v3.set(s,s,s);S.m4.compose(c.p,S.q1,S.v3);F.im.setMatrixAt(k++,S.m4)}
+  if(k||F.im.count){F.im.count=k;F.im.instanceMatrix.needsUpdate=true}
+  if(F.ht>0){F.ht-=dt;const f=Math.max(0,F.ht/F.hl);F.halo.material.color.setScalar(f*(.75+.25*Math.sin(K3D.t*20)));if(F.ht<=0)F.halo.visible=false}}
+/* ---------- Halle aufbauen (je Thema einmal) ---------- */
+function k3dBuildW(W){if(W.k3d)return W.k3d;const S=k3dSh(),R=W.k3d={ms:[],bulbs:null,fx:null,wheel:null,hidden:0};if(!W.L||!W.L.slot||!W.sc)return R;
+  const map=k3dHideMap(W),q=new THREE.Quaternion(),v=new THREE.Vector3(),bx=new THREE.Box3(),sz=new THREE.Vector3(),ce=new THREE.Vector3(),slots=(W.st||[]).filter(t=>t.k==='slot');let gi=slots.length;
+  for(const s of W.L.slot){const p=s.getWorldPosition(new THREE.Vector3());s.getWorldQuaternion(q);v.set(0,0,1).applyQuaternion(q);const sx=p.x+v.x*1.45,sz2=p.z+v.z*1.45,st=slots.find(t=>Math.abs(t.x-sx)<.06&&Math.abs(t.z-sz2)<.06)||null;
+    if(!k3dHideSlot(W,s,map))continue;R.hidden++;bx.setFromObject(s);bx.getSize(sz);bx.getCenter(ce);const d=new THREE.Vector3(v.x,0,v.z);if(d.lengthSq()<1e-6)d.set(0,0,1);d.normalize();
+    R.ms.push(k3dMach(W,{x:ce.x,y:Math.max(0,bx.min.y),z:ce.z,ry:Math.atan2(d.x,d.z),h:sz.y,fw:Math.abs(d.z)>Math.abs(d.x)?sz.x:sz.z,m:st?st.m:(gi++)%AUTOS.length,st,dir:d}))}
+  let nb=0;for(const m of R.ms)nb+=m.bl.length;
+  if(nb){const im=new THREE.InstancedMesh(new THREE.SphereGeometry(.024,8,6),new THREE.MeshBasicMaterial({toneMapped:false}),nb),mm=new THREE.Matrix4(),c=new THREE.Color(1,1,1);let k=0;im.frustumCulled=false;
+    for(const m of R.ms){m.g.updateMatrixWorld(true);m.b0=k;m.nb=m.bl.length;for(const p of m.bl){S.v1.copy(p).applyMatrix4(m.g.matrixWorld);mm.makeTranslation(S.v1.x,S.v1.y,S.v1.z);im.setMatrixAt(k,mm);im.setColorAt(k,c);k++}}
+    im.instanceColor.setUsage(THREE.DynamicDrawUsage);W.sc.add(im);R.bulbs=im}
+  R.fx=k3dFxMake(W.sc);try{R.wheel=k3dWheel(W)}catch(e){k3dErr(e)}return R}
+/* ---------- Licht-Show ---------- */
+function k3dLights(R,dt,rm){const B=R.bulbs,t=K3D.t,c=k3dSh().c1;
+  for(const m of R.ms){const act=m===K3D.mach&&K3D.mode==='slot',sh=act?K3D.show:null,kind=sh?sh.k:(m.isp?'spin':'idle'),lvl=sh&&sh.lvl||0,col=m.A.col;
+    if(B)for(let j=0;j<m.nb;j++){let v;if(rm)v=kind==='win'?1:.75;else if(kind==='win')v=((j+Math.floor(t*(lvl>1?12:8)))%2)?1:.12;else if(kind==='spin')v=.25+.75*Math.pow(Math.max(0,Math.cos(j*.9-t*16)),6);else v=.3+.7*Math.pow(Math.max(0,Math.cos(j*.45-t*2.6+m.ph)),8);
+      if(kind==='win'&&lvl>=3&&!rm)c.setHSL((j/m.nb+t*.6)%1,1,.6).multiplyScalar(.4+v*1.1);else c.copy(col).multiplyScalar(.25+v*1.25);B.setColorAt(m.b0+j,c)}
+    let fr=.8+.18*Math.sin(t*2+m.ph);if(kind==='spin')fr=1.25;if(kind==='win')fr=rm?1.6:((Math.floor(t*8)%2)?2:.55);m.frame.material.color.copy(col).multiplyScalar(fr);
+    m.glass.material.color.setScalar(kind==='win'&&!rm?.9+.7*Math.abs(Math.sin(t*9)):1)}
+  if(B&&B.instanceColor)B.instanceColor.needsUpdate=true;
+  const s=K3D.show;if(s&&s.k==='win'){s.t+=dt;if(s.t>(s.lvl>=3?5:s.lvl>=2?3.2:2))K3D.show={k:'idle'}}}
+// Leerlauf: Bot-Automaten und freie Automaten drehen ab und zu
+function k3dIdleSpin(R,dt,rm){for(const m of R.ms){if(m===K3D.mach&&m.reels)continue;if(m.isp){const s=m.isp;s.t+=dt;const u=Math.min(1,s.t/s.T);m.idle.rotation.x=s.p0+(s.e-s.p0)*(1-Math.pow(1-u,3));if(u>=1){m.idle.rotation.x=s.e%TAU;m.isp=null;m.nx=K3D.t+(m.st?14+Math.random()*20:4+Math.random()*8)}}
+  else{if(!m.nx)m.nx=K3D.t+2+Math.random()*10;if(K3D.t>m.nx&&!rm){const p0=m.idle.rotation.x;m.isp={t:0,T:1.1+Math.random()*.6,p0,e:p0+TAU*2+Math.floor(Math.random()*K3D_N)*TAU/K3D_N}}}}}
+/* ---------- Kamera: sanfte Fahrt vor Automat/Station, Bildausschnitt per setViewOffset ---------- */
+function k3dRegion(w,h){if(K3D.mode==='holo'&&K3D.hreg)return K3D.reg=K3D.hreg;if(K3D.mode!=='slot')return K3D.reg||{fx:.5,fy:.5,fw:1,fh:1};if(K3D.reg&&K3D.t<K3D.regT)return K3D.reg;K3D.regT=K3D.t+.3;
+  const o=$('c3Ov'),bar=$('k3dBar'),tp=$('k3dTop');if(!o||!bar)return K3D.reg||{fx:.5,fy:.4,fw:1,fh:.7};const th=(tp?tp.offsetHeight:44)+14,or=o.getBoundingClientRect(),br=bar.getBoundingClientRect(),bt=br.top-or.top,bl=br.left-or.left;
+  return K3D.reg=bl>w*.42?{fx:bl/2/w,fy:(th+(h-th)/2)/h,fw:Math.max(.2,(bl-12)/w),fh:Math.max(.2,(h-th-8)/h)}:{fx:.5,fy:(th+Math.max(60,bt-th-6)/2)/h,fw:.96,fh:Math.max(60,bt-th-6)/h}}
+function k3dCam(dt,rm){const cam=C3.cam;if(!cam||!C3.R)return;if(K3D.ct>K3D.cb)K3D.cb=rm?1:Math.min(1,K3D.cb+dt/.9);else if(K3D.ct<K3D.cb)K3D.cb=rm?0:Math.max(0,K3D.cb-dt/.75);
+  const cb=K3D.cb,T=K3D.tgt;if(cb<=0||!T){if(cam.view&&cam.view.enabled)cam.clearViewOffset();if(cb<=0&&!K3D.mode)K3D.tgt=null;return}
+  const S=k3dSh(),cv=C3.R.domElement,w=cv.clientWidth||1,h=cv.clientHeight||1,asp=w/h,reg=k3dRegion(w,h),tv=Math.tan(cam.fov*Math.PI/360);
+  const d=Math.min(10,Math.max(.9,Math.max(T.rv/(tv*reg.fh),T.rh/(tv*asp*reg.fw)))),P=S.v1.copy(T.d).multiplyScalar(d*Math.cos(T.el)).add(T.f);P.y+=d*Math.sin(T.el);
+  if(K3D.shake>0){K3D.shake-=dt;if(!rm){const a=K3D.shake*.035;P.x+=(Math.random()-.5)*a;P.y+=(Math.random()-.5)*a}}
+  S.m4.lookAt(P,T.f,S.up);S.q1.setFromRotationMatrix(S.m4);const k=cb*cb*(3-2*cb);cam.position.lerp(P,k);cam.quaternion.slerp(S.q1,k);cam.setViewOffset(w,h,(.5-reg.fx)*w*k,(.5-reg.fy)*h*k,w,h)}
+/* ---------- Bild-Schleife (laeuft im Render-Aufruf der Halle) ---------- */
+function k3dFrame(){const now=performance.now(),dt=Math.min(.05,(now-(K3D.last||now))/1000);K3D.last=now;K3D.t+=dt;
+  if((K3D.mode||K3D.cb>0)&&$('casOv').classList.contains('hide')){k3dExit(true);return}
+  const W=typeof CH!=='undefined'&&CH.cur,R=W&&W.k3d;if(!R)return;const rm=k3dRM();
+  k3dPendTick();if(K3D.anim)k3dAnimTick(dt,rm);
+  if(K3D.lever&&K3D.mach){const L=K3D.lever;L.t+=dt;const t=L.t;let a;if(t<.16)a=1.05*(t/.16);else{const s=t-.16;a=1.05*Math.exp(-s*5.5)*Math.cos(s*7)}K3D.mach.lever.rotation.x=-.18+a;if(t>1.2){K3D.lever=null;K3D.mach.lever.rotation.x=-.18}}
+  if(K3D.autoT>0){K3D.autoT-=dt;if(K3D.autoT<=0)k3dSpin('auto')}
+  k3dLights(R,dt,rm);k3dIdleSpin(R,dt,rm);if(R.fx)k3dFxTick(R.fx,dt);if(R.wheel)k3dWheelTick(R,dt);k3dCam(dt,rm);
+  if(K3D.mode==='slot'){K3D.uiT-=dt;if(K3D.uiT<=0){K3D.uiT=1;k3dJpUpd()}}k3dWinPos(dt)}
+function k3dHook(){if(K3D.hook||!C3.R)return;K3D.hook=true;const R=C3.R,r0=R.render;R.render=function(s,c){if(c===C3.cam&&!K3D.dead&&!K3D.off)try{k3dFrame()}catch(e){k3dErr(e)}return r0.apply(this,arguments)}}
+/* ---------- Automat: betreten, drehen, Ergebnis ---------- */
+function k3dActivate(m){const A=m.A,M=A.M,step=TAU/K3D_N,rows=auRows(M);m.idle.visible=false;const geo=new THREE.CylinderGeometry(m.r,m.r,m.wwd/3-.014,36,1,true).rotateZ(Math.PI/2);m.rg=geo;m.reels=[];
+  for(let c=0;c<3;c++){const cv=k3dCv(K3D_N*96,112),tx=k3dTex(cv),mat=new THREE.MeshBasicMaterial({map:tx,toneMapped:false,color:0xe6e6e6}),mesh=new THREE.Mesh(geo,mat);tx.anisotropy=4;mesh.position.set(m.wcx+(c-1)*m.wwd/3,m.wcy,m.zf-.012-m.r);
+    const r={mesh,cv,tx,mat,phi:.5*step};mesh.rotation.x=r.phi;m.g.add(mesh);m.reels.push(r);const g=cv.getContext('2d');
+    for(let k=0;k<K3D_N;k++)k3dSlot(g,A,k,auRoll(M),0,112,96);k3dSlot(g,A,1,rows[c][0],0,112,96);k3dSlot(g,A,0,rows[c][1],0,112,96);k3dSlot(g,A,K3D_N-1,rows[c][2],0,112,96)}
+  const tok=m.tok=(m.tok||0)+1,src=k3dSrc(M.id);if(src){const im=new Image();im.onload=()=>{if(m.tok!==tok||K3D.mach!==m)return;try{const cv=k3dCv(512,Math.round(512/M.ar));k3dArtDraw(cv,M,im);const t=k3dTex(cv);t.anisotropy=8;m.hi=t;m.panel.material.map=t}catch(e){k3dErr(e)}};im.src=src}}
+function k3dDeact(m){if(!m)return;m.tok=(m.tok||0)+1;if(m.reels){for(const r of m.reels){m.g.remove(r.mesh);r.mat.dispose();r.tx.dispose();r.cv.width=r.cv.height=0}m.reels=null}if(m.rg){m.rg.dispose();m.rg=null}if(m.hi){m.panel.material.map=m.A.tx;m.hi.dispose();m.hi=null}m.idle.visible=true;m.lever.rotation.x=-.18}
+function k3dEnter(m){if(!m||!m.st||K3D.mode||!k3dOk())return;const s=m.st;AS.m=s.m;AS.rows=null;AS.npcs=null;
+  K3D.mode='slot';K3D.mach=m;K3D.ct=1;K3D.show={k:'idle'};K3D.autoT=0;K3D.pend=null;K3D.reg=null;K3D.regT=0;m.isp=null;
+  K3D.tgt={f:m.g.localToWorld(new THREE.Vector3(0,m.base+m.Hp*.5,m.zf)),d:m.dir.clone(),el:.07,rv:m.Hp*.53,rh:m.Wp/2+.24};
+  if(C3.me&&C3.me.g){C3.me.g.position.x=s.x;C3.me.g.position.z=s.z;C3.me.g.visible=false}C3.tgt=null;C3.joy=null;try{const p=$('c3Pop');if(p)p.remove()}catch(e){}
+  k3dActivate(m);$('c3Ov').classList.add('k3dOn');['k3dBar','k3dTop'].forEach(i=>{const e=$(i);if(e)e.classList.remove('hide')});if(k3dRM())K3D.cb=1;k3dUiUpd()}
+function k3dEase(u,rm){if(rm)return u;const a=.1,g=u<a?u*u/(2*a)/(1-a/2):(u-a/2)/(1-a/2);return 1-Math.pow(1-g,3)}
+function k3dSpin(src){const m=K3D.mach;if(K3D.mode!=='slot'||!m||!m.reels||K3D.anim||AS.spin)return;K3D.autoT=0;if(AS.m!==m.st.m)AS.m=m.st.m;
+  try{auSpin()}catch(e){k3dErr(e);return}
+  if(!AS.spin||!AS.pend){k3dUiUpd();return}
+  const P={rows:AS.pend.rows,win:AS.pend.win,t:AS.pend.t,jp:AS.pend.jp},rm=k3dRM(),step=TAU/K3D_N,A=m.A,a={t:0,P,bet:AS.bet,T:rm?[.08,.1,.12]:[.9,1.4,1.9],p0:[],e:[],st:[0,0,0]};
+  for(let c=0;c<3;c++){const r=m.reels[c],p0=r.phi,j0=((Math.round(p0/step-.5)%K3D_N)+K3D_N)%K3D_N,k=(j0+6)%K3D_N,g=r.cv.getContext('2d');
+    for(let q=0;q<K3D_N;q++){if((q-j0+K3D_N+1)%K3D_N<=2)continue;k3dSlot(g,A,q,auRoll(A.M),0,112,96)}
+    k3dSlot(g,A,(k+1)%K3D_N,P.rows[c][0],0,112,96);k3dSlot(g,A,k,P.rows[c][1],0,112,96);k3dSlot(g,A,(k+K3D_N-1)%K3D_N,P.rows[c][2],0,112,96);r.tx.needsUpdate=true;
+    const tgt=(k+.5)*step,base=p0+TAU*(rm?0:1+c);let e=base+((tgt-base)%TAU+TAU)%TAU;if(e-p0<.5)e+=TAU;a.p0.push(p0);a.e.push(e)}
+  K3D.anim=a;K3D.show={k:'spin',t:0};if(!rm&&src!=='auto')K3D.lever={t:0};K3D.wt=null;const wt=$('k3dWinTx');if(wt){wt.classList.remove('on');wt.style.opacity=''}k3dUiUpd()}
+function k3dAnimTick(dt,rm){const a=K3D.anim,m=K3D.mach;if(!a||!m||!m.reels){K3D.anim=null;return}a.t+=dt;let all=true;
+  for(let c=0;c<3;c++){const r=m.reels[c],T=a.T[c],u=a.t/T;
+    if(u>=1){if(!a.st[c]){a.st[c]=1;try{Sound.click()}catch(e){}if(!rm&&CH.cur&&CH.cur.k3d)k3dSparks(CH.cur.k3d.fx,m.g.localToWorld(k3dSh().v2.set(m.wcx+(c-1)*m.wwd/3,m.wcy-m.hw*.5,m.zf+.02)),5,1,m.A.col)}
+      const s=(a.t-T)/.22;r.phi=a.e[c]+(!rm&&s<1?.1*Math.sin(s*Math.PI)*(1-s):0)}
+    else{all=false;r.phi=a.p0[c]+(a.e[c]-a.p0[c])*k3dEase(u,rm)}r.mesh.rotation.x=r.phi}
+  if(all&&a.t>a.T[2]+.22&&!AS.spin){for(const r of m.reels){r.phi=r.phi%TAU;r.mesh.rotation.x=r.phi}K3D.anim=null;k3dDone(a)}}
+function k3dDone(a){const P=a.P,m=K3D.mach,win=P.win,bet=a.bet,lvl=P.jp?3:win>=bet*20?3:win>=bet*5?2:win>0?1:0;
+  if(win>0&&m){try{Sound.slotWin(lvl)}catch(e){}if(P.jp){try{voiceSay('orion','Jackpot!')}catch(e){}try{toast('STERNEN-JACKPOT! +'+fmt(P.jp)+' Chips','crown')}catch(e){}}k3dWinFx(m,lvl,P)}else K3D.show={k:'idle'};
+  k3dUiUpd();if(AS.free>0||AS.respin)K3D.autoT=lvl>=2?2.4:1.3}
+function k3dWinFx(m,lvl,P){const rm=k3dRM(),R=CH.cur&&CH.cur.k3d,F=R&&R.fx;K3D.show={k:'win',t:0,lvl};if(!F)return;const wp=m.g.localToWorld(new THREE.Vector3(m.wcx,m.wcy,m.zf+.05));
+  if(!rm){k3dSparks(F,wp,lvl>=3?150:lvl>=2?90:36,lvl,m.A.col);k3dCoins(F,m,lvl>=3?40:lvl>=2?20:6);if(lvl>=2)K3D.shake=.45;for(let i=0;i<Math.min(6,lvl*2);i++)setTimeout(()=>{try{Sound.coin()}catch(e){}},320+i*150)}
+  F.halo.position.copy(wp);F.halo.quaternion.copy(m.g.quaternion);F.halo.scale.setScalar(m.Hp*(lvl>=3?2.6:1.8));F.hl=F.ht=lvl>=3?3:lvl>=2?1.8:1;F.halo.visible=true;
+  k3dWinTx(m,lvl,'+'+fmt(P.win),P.jp?'STERNEN-JACKPOT':lvl>=3?k3dTx('MEGA-GEWINN','MEGA WIN')+(P.t?' · '+P.t:''):lvl>=2?k3dTx('GROSSER GEWINN','BIG WIN')+(P.t?' · '+P.t:''):P.t||'')}
+function k3dWinTx(m,lvl,txt,sub){const el=$('k3dWinTx');if(!el)return;el.className='k3dWinTx l'+lvl;el.innerHTML='<b></b><small></small>';el.firstChild.textContent=txt;el.lastChild.textContent=sub||'';if(!sub)el.lastChild.remove();
+  K3D.wt={m,t:lvl>=3?3.4:2.4};void el.offsetWidth;el.classList.add('on');el.style.opacity=k3dRM()?'1':'';k3dWinPos(0)}
+function k3dWinPos(dt){const w=K3D.wt,el=$('k3dWinTx');if(!w||!el)return;w.t-=dt;if(w.t<=0){K3D.wt=null;el.classList.remove('on');el.style.opacity='';return}
+  const m=w.m,v=k3dSh().v2,cv=C3.R.domElement;m.g.localToWorld(v.set(m.wcx,m.wcy+m.hw*.78,m.zf));v.project(C3.cam);el.style.left=((v.x+1)/2*cv.clientWidth).toFixed(1)+'px';el.style.top=((1-v.y)/2*cv.clientHeight).toFixed(1)+'px'}
+/* ---------- Bedienleiste ---------- */
+function k3dJpUpd(){try{const e=$('k3dJp');if(e)e.textContent=fmt(auJp())}catch(e){}}
+function k3dUiUpd(){const m=K3D.mach;if(!m)return;const a=K3D.anim,busy=!!(a||AS.spin),M=AUTOS[AS.m]||m.A.M,hid=a?a.P.win:0,set=(i,t)=>{const e=$(i);if(e)e.textContent=t};
+  set('k3dName',M.n);set('k3dChips',fmt(Math.max(0,save.chips-hid)));set('k3dBet',fmt(AS.bet));
+  const wv=$('k3dWinV');if(wv){const w=busy?0:(AS.win||0);wv.textContent=w>0?'+'+fmt(w):'0';wv.parentNode.classList.toggle('won',w>0)}
+  const i=AUBETS.indexOf(AS.bet),sb=$('k3dSpinB');if(sb){sb.disabled=busy;sb.innerHTML=ic('chip')+'<span></span>';sb.lastChild.textContent=(AS.free>0||AS.respin?k3dTx('GRATIS','FREE'):k3dTx('DREHEN','SPIN'))+' · '+fmt(AS.bet)}
+  const mi=$('k3dMinus'),pl=$('k3dPlus'),bk=$('k3dBack'),cl=$('k3dClassic');if(mi)mi.disabled=busy||i<=0;if(pl)pl.disabled=busy||i<0||i>=AUBETS.length-1||AUBETS[i+1]>save.chips;if(bk)bk.disabled=busy;if(cl)cl.disabled=busy;
+  const g=$('k3dGam');if(g){const on=!busy&&AS.gamble>0;g.classList.toggle('hide',!on);if(on)g.textContent=k3dTx('Verdoppeln? ','Double? ')+fmt(AS.gamble)+' Chips · 50 %'}
+  set('k3dMsg',busy?(AS.free>0||AS.respin?k3dTx('Gratis-Dreh …','Free spin …'):k3dTx('Die Walzen drehen …','Reels spinning …')):(AS.msg||k3dTx('Hebel ziehen, Knopf am Automaten tippen oder DREHEN.','Pull the lever, tap the machine button or SPIN.'))+(AS.free>0?' · '+k3dTx('Freispiele','Free spins')+': '+AS.free:''));
+  try{$('casChips').textContent=fmt(Math.max(0,save.chips-hid))}catch(e){}k3dJpUpd()}
+function k3dAct(k){const m=K3D.mach,busy=!!(K3D.anim||AS.spin);
+  if(k==='hback'){if(busy||(typeof RL!=='undefined'&&RL.spin))return;try{Sound.click()}catch(e){}casTab='hall';try{CUI.in=true}catch(e){}casRender();return}
+  if(K3D.mode!=='slot'||!m)return;
+  if(k==='spin')k3dSpin('btn');
+  else if(k==='back'){if(busy)return;try{Sound.click()}catch(e){}k3dExit(false)}
+  else if(k==='minus'||k==='plus'){if(busy)return;const i=AUBETS.indexOf(AS.bet),j=k==='plus'?i+1:i-1;if(i<0||j<0||j>=AUBETS.length)return;if(k==='plus'&&AUBETS[j]>save.chips){try{toast(k3dTx('Nicht genug Chips','Not enough chips'),'chip')}catch(e){}return}AS.bet=AUBETS[j];try{Sound.click()}catch(e){}k3dUiUpd()}
+  else if(k==='pay'){const o=document.createElement('div');o.className='casPop';o.innerHTML=`<div class="cpBox"><button class="iconBtn cpX" aria-label="Schließen">${ic('close')}</button>${auPayHtml(AUTOS[AS.m])}</div>`;o.addEventListener('click',e2=>{if(e2.target===o||e2.target.closest('.cpX'))o.remove()});$('casOv').appendChild(o);try{Sound.click()}catch(e){}}
+  else if(k==='classic'){if(busy)return;const s=m.st;k3dExit(true);try{K3D.go0(s)}catch(e){k3dErr(e)}}
+  else if(k==='gamble'){if(busy||!(AS.gamble>0))return;const b=document.createElement('button');b.dataset.a='augamble';b.style.display='none';$('casBody').appendChild(b);b.click();b.remove();k3dUiUpd()}}
+function k3dUi(o){if(!o||$('k3dBar'))return;const L=(de,en)=>k3dTx(de,en),d=document.createElement('div');
+  d.innerHTML=`<div id="k3dTop" class="k3dTop hide"><span class="k3dJp"><small>${L('Jackpot','Jackpot')}</small><b id="k3dJp">0</b></span><span class="k3dName" id="k3dName"></span><button class="ghost k3dB" data-k3d="pay" aria-label="${L('Gewinntabelle','Paytable')}">${ic('star')}</button><button class="ghost k3dB" id="k3dClassic" data-k3d="classic" aria-label="${L('Klassische Ansicht','Classic view')}">2D</button></div>`+
+    `<div id="k3dBar" class="k3dBar hide"><div class="k3dInfo"><span>Chips<b id="k3dChips">0</b></span><span>${L('Einsatz','Bet')}<b id="k3dBet">0</b></span><span>${L('Gewinn','Win')}<b id="k3dWinV">0</b></span></div>`+
+    `<div class="k3dCtl"><button class="ghost k3dB" id="k3dBack" data-k3d="back" aria-label="${L('Zurück zur Halle','Back to hall')}">${ic('s-arrow_left')}</button><button class="ghost k3dB" id="k3dMinus" data-k3d="minus" aria-label="${L('Einsatz verringern','Lower bet')}">−</button><button class="buy k3dSpin" id="k3dSpinB" data-k3d="spin"></button><button class="ghost k3dB" id="k3dPlus" data-k3d="plus" aria-label="${L('Einsatz erhöhen','Raise bet')}">+</button></div>`+
+    `<button class="buy gem k3dGam hide" id="k3dGam" data-k3d="gamble"></button><p class="k3dMsg" id="k3dMsg" aria-live="polite"></p></div><div id="k3dWinTx" class="k3dWinTx" aria-live="polite"></div>`;
+  while(d.firstChild)o.appendChild(d.firstChild);
+  o.addEventListener('click',e=>{const b=e.target.closest('[data-k3d]');if(!b||b.disabled)return;e.stopPropagation();k3dAct(b.dataset.k3d)});
+  // Antippen in der Halle (Automat/Station) und am Automaten (Hebel, Knopf, Walzen)
+  o.addEventListener('pointerdown',e=>{if(e.target.id!=='c3cv')return;K3D.pd={x:e.clientX,y:e.clientY,t:performance.now()};if(K3D.mode==='slot')e.stopPropagation()},true);
+  o.addEventListener('pointermove',e=>{if(e.target.id==='c3cv'&&K3D.mode==='slot')e.stopPropagation()},true);
+  o.addEventListener('pointercancel',e=>{if(e.target.id==='c3cv'&&K3D.mode==='slot')e.stopPropagation()},true);
+  o.addEventListener('wheel',e=>{if(e.target.id==='c3cv'&&K3D.mode==='slot'){e.stopPropagation();e.preventDefault()}},{capture:true,passive:false});
+  o.addEventListener('pointerup',e=>{if(e.target.id!=='c3cv')return;const pd=K3D.pd;K3D.pd=null;const tap=!!pd&&Math.hypot(e.clientX-pd.x,e.clientY-pd.y)<14&&performance.now()-pd.t<700;
+    if(K3D.mode==='slot'){e.stopPropagation();if(tap)try{k3dTapClose(e)}catch(x){k3dErr(x)}return}K3D.tapHit=null;if(tap&&!K3D.mode&&k3dOk())try{K3D.tapHit=k3dPickHall(e)}catch(x){k3dErr(x)}},true);
+  o.addEventListener('pointerup',e=>{if(e.target.id!=='c3cv'||!K3D.tapHit)return;const h=K3D.tapHit;K3D.tapHit=null;try{k3dTapGo(h)}catch(x){k3dErr(x)}});
+  const hb=document.createElement('button');hb.id='k3dHB';hb.type='button';hb.className='ghost k3dHB hide';hb.innerHTML=ic('s-arrow_left')+'<span></span>';hb.lastChild.textContent=L('Halle','Hall');hb.setAttribute('aria-label',L('Zurück zur Halle','Back to hall'));
+  hb.addEventListener('click',e=>{e.stopPropagation();k3dAct('hback')});const ov=$('casOv');if(ov)ov.appendChild(hb);
+  document.addEventListener('keydown',e=>{if(!K3D.mode||$('casOv').classList.contains('hide'))return;const t=e.target;if(t&&t.closest&&t.closest('input,textarea,select'))return;
+    if(K3D.mode==='slot'&&(e.key===' '||e.key==='Enter')&&!(t&&t.closest&&t.closest('button'))){e.preventDefault();k3dSpin('key')}else if(e.key==='Escape'){if(K3D.mode==='slot'){if(!K3D.anim&&!AS.spin)k3dExit(false)}else k3dAct('hback')}});
+  window.addEventListener('resize',()=>{K3D.regT=0;if(K3D.holo)try{k3dHoloLay()}catch(e){}})}
+/* ---------- Antippen ---------- */
+function k3dPickHall(e){const W=CH.cur,R=W&&W.k3d;if(!R||K3D.cb>.01||!C3.cam)return null;const S=k3dSh(),cv=C3.R.domElement,r=cv.getBoundingClientRect();S.n2.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);S.ray.setFromCamera(S.n2,C3.cam);const ray=S.ray.ray;let best=null,bd=1e9;
+  for(const m of R.ms){if(!m.st)continue;S.m5.copy(m.g.matrixWorld).invert();S.lr.copy(ray).applyMatrix4(S.m5);if(S.lr.intersectBox(m.box,S.v1)){m.g.localToWorld(S.v1);const d=S.v1.distanceTo(ray.origin);if(d<bd){bd=d;best={s:m.st}}}}
+  for(const s of(W.st||[])){if(!K3D_HOLO[s.k])continue;const f=k3dFocus(s);if(!f)continue;S.sp.center.copy(f.f);S.sp.radius=f.pick;if(ray.intersectSphere(S.sp,S.v1)){const d=S.v1.distanceTo(ray.origin);if(d<bd){bd=d;best={s}}}}return best}
+function k3dTapGo(h){const s=h.s;if(!s||!C3.me)return;C3.tgt=null;if(C3.mark&&C3.mark.material){C3.markT=0;C3.mark.material.opacity=0}try{const p=$('c3Pop');if(p)p.remove()}catch(e){}
+  try{Sound.click()}catch(e){}const p=C3.me.g.position,d=Math.hypot(p.x-s.x,p.z-s.z);if(d<1.9){c3Go(s);return}C3.tgt={x:s.x,z:s.z};K3D.pend=s}
+function k3dPendTick(){const s=K3D.pend;if(!s||!C3.me)return;if(K3D.mode||C3.joy){K3D.pend=null;return}if(C3.tgt&&(Math.abs(C3.tgt.x-s.x)>.01||Math.abs(C3.tgt.z-s.z)>.01)){K3D.pend=null;return}
+  const p=C3.me.g.position,d=Math.hypot(p.x-s.x,p.z-s.z);if(d<.45||(!C3.tgt&&d<1.9)){K3D.pend=null;C3.tgt=null;c3Go(s)}else if(!C3.tgt)K3D.pend=null}
+function k3dTapClose(e){const m=K3D.mach;if(!m||K3D.cb<.6||K3D.anim||AS.spin)return;const S=k3dSh(),cv=C3.R.domElement,r=cv.getBoundingClientRect();S.n2.set((e.clientX-r.left)/r.width*2-1,-(e.clientY-r.top)/r.height*2+1);S.ray.setFromCamera(S.n2,C3.cam);
+  S.m5.copy(m.g.matrixWorld).invert();const lr=S.lr.copy(S.ray.ray).applyMatrix4(S.m5);S.sp.center.set(m.Wp/2+.12,m.wcy+.3,-.04);S.sp.radius=.22;if(lr.intersectSphere(S.sp,S.v1)){k3dSpin('lever');return}
+  if(lr.direction.z>=0)return;const t=(m.zf-lr.origin.z)/lr.direction.z;if(t<0)return;const x=lr.origin.x+lr.direction.x*t,y=lr.origin.y+lr.direction.y*t,u=x/m.Wp+.5,v=1-(y-m.base)/m.Hp,[wx,wy,ww,wh]=m.M.W,[bx,by,bw,bh]=m.M.B;
+  if((u>wx-.03&&u<wx+ww+.03&&v>wy-.03&&v<wy+wh+.03)||(u>bx-.04&&u<bx+bw+.04&&v>by-.04&&v<by+bh+.04))k3dSpin('tap')}
+/* ---------- Stationen (Roulette, Blackjack, Poker, Kasse, Praemien): Kamerafahrt + Spiel als Hologramm ---------- */
+function k3dFocus(s){const W=CH.cur,R=W&&W.k3d;if(!R)return null;let f=null,rad=1.5,el=.72,pick=1.2;
+  if(s.k==='rl'){if(R.wheel){f=R.wheel.g.position.clone();f.y+=.06}else if(W.wheel)f=W.wheel.position.clone();rad=.8;el=1;pick=.85}
+  else if(s.k==='bj'||s.k==='pk'){let bd=4;for(const t of(W.L&&W.L.tab||[])){const p=t.getWorldPosition(new THREE.Vector3()),d=Math.hypot(p.x-s.x,p.z-s.z);if(d<bd){bd=d;f=new THREE.Vector3(p.x,.88,p.z)}}rad=1.7;el=.78;pick=1.35}
+  else if(s.k==='swap'||s.k==='prize'){f=new THREE.Vector3(s.x,1,s.z+1.2);rad=s.k==='swap'?1.75:1.1;el=.32;pick=s.k==='swap'?1.3:.85}
+  if(!f)return null;const d=new THREE.Vector3(s.x-f.x,0,s.z-f.z);if(d.lengthSq()<1e-4)d.set(0,0,1);d.normalize();return{f,d,el,rv:rad,rh:rad,pick}}
+function k3dHoloLay(){const ov=$('casOv'),b=$('casBody'),o=$('c3Ov');if(!ov||!b)return;ov.classList.add('k3dHolo');b.classList.remove('c3Under');const w=b.clientWidth||ov.clientWidth||1,h=b.clientHeight||ov.clientHeight||1,land=w>h*1.15&&w>=560;ov.classList.toggle('k3dLand',land);
+  const top=land?0:Math.round(h*.36),left=land?Math.round(w*.44):0;ov.style.setProperty('--k3dTop',top+'px');ov.style.setProperty('--k3dLeft',left+'px');
+  K3D.hreg=land?{fx:left/2/w,fy:.5,fw:left/w*.94,fh:.9}:{fx:.5,fy:top/2/h,fw:.94,fh:Math.max(.2,top/h*.9)};const hb=$('k3dHB');if(hb&&o)hb.style.top=((parseFloat(o.style.top)||110)+10)+'px'}
+function k3dHoloGo(s,go){const f=k3dFocus(s);if(!f)return false;K3D.mode='holo';K3D.holo={s,tab:s.k};K3D.tgt=f;K3D.ct=1;K3D.pend=null;if(C3.me&&C3.me.g)C3.me.g.visible=false;C3.tgt=null;C3.joy=null;
+  K3D.going=1;try{k3dHoloLay();go(s)}finally{K3D.going=0}if(K3D.holo){k3dHoloLay();const hb=$('k3dHB');if(hb)hb.classList.remove('hide');if(k3dRM())K3D.cb=1}return true}
+/* ---------- Verlassen ---------- */
+function k3dExit(instant){const m=K3D.mach;if(m){K3D.anim=null;K3D.lever=null;try{k3dDeact(m)}catch(e){}}
+  K3D.mach=null;K3D.holo=null;K3D.mode=null;K3D.ct=0;K3D.autoT=0;K3D.pend=null;K3D.wt=null;K3D.show={k:'idle'};if(typeof C3!=='undefined'&&C3.me&&C3.me.g)C3.me.g.visible=true;
+  const o=$('c3Ov');if(o)o.classList.remove('k3dOn');['k3dBar','k3dTop','k3dHB'].forEach(i=>{const e=$(i);if(e)e.classList.add('hide')});const wt=$('k3dWinTx');if(wt){wt.classList.remove('on');wt.style.opacity=''}
+  const ov=$('casOv');if(ov)ov.classList.remove('k3dHolo','k3dLand');
+  if(instant){K3D.cb=0;K3D.tgt=null;try{if(C3.cam&&C3.cam.view&&C3.cam.view.enabled)C3.cam.clearViewOffset()}catch(e){}}}
+/* ---------- Einhaengen in c3d / chall / Spiele ---------- */
+if(!K3D.off){
+  {const _f=c3Ov;c3Ov=function(){const o=_f.apply(this,arguments);try{k3dUi(o)}catch(e){k3dErr(e)}return o}}
+  {const _f=c3Show;c3Show=function(){const r=_f.apply(this,arguments);try{if(r)k3dHook()}catch(e){k3dErr(e)}return r}}
+  {const _f=chUse;chUse=function(W){if(K3D.mode||K3D.cb>0)k3dExit(true);const r=_f.apply(this,arguments);try{if(!K3D.dead&&W&&typeof THREE!=='undefined')k3dBuildW(W)}catch(e){k3dErr(e)}return r}}
+  {const _f=c3Go;K3D.go0=_f;c3Go=function(s){try{if(k3dOk()&&s&&!K3D.going&&!K3D.mode){if(s.k==='slot'){const m=CH.cur.k3d.ms.find(x=>x.st===s);if(m){k3dEnter(m);return}}else if(K3D_HOLO[s.k]){if(k3dHoloGo(s,_f))return}}}catch(e){k3dErr(e)}return _f.apply(this,arguments)}}
+  {const _f=c3Hide;c3Hide=function(){try{if(K3D.going||(K3D.holo&&casTab===K3D.holo.tab&&!$('casOv').classList.contains('hide'))){const b=$('casBody');if(b)b.classList.remove('c3Under');const p=$('c3Pop');if(p)p.remove();try{chPick(false)}catch(e){}return}if(K3D.mode||K3D.cb>0)k3dExit(true)}catch(e){k3dErr(e)}return _f.apply(this,arguments)}}
+  {const _f=c3Talk;c3Talk=function(){if(K3D.tapHit)return;return _f.apply(this,arguments)}}
+  {const _f=casRender;casRender=function(){try{if(K3D.holo&&casTab!==K3D.holo.tab){const back=casTab==='hall';K3D.holo=null;K3D.mode=null;K3D.ct=0;$('casOv').classList.remove('k3dHolo','k3dLand');const hb=$('k3dHB');if(hb)hb.classList.add('hide');if(C3.me&&C3.me.g)C3.me.g.visible=true;if(!back)k3dExit(true)}
+      else if(K3D.holo||K3D.going)k3dHoloLay()}catch(e){k3dErr(e)}return _f.apply(this,arguments)}}
+  {const _f=rlSpin;rlSpin=function(){const was=RL.spin,r=_f.apply(this,arguments);try{if(!was&&RL.spin&&RL.pend)k3dWheelSpin(RL.pend.n,RL.pend.w)}catch(e){k3dErr(e)}return r}}
+}
+/* Diagnose: __vlKasino3d() · Test: __vlKasino3d({open:1}) · ({slot:0}) · ({spin:1}) · ({station:'rl'}) · ({zurueck:1}) */
+window.__vlKasino3d=function(o){o=o||{};try{if(o.open)openCasino();if(o.slot!=null&&k3dOk()&&!K3D.mode){const m=CH.cur.k3d.ms.filter(x=>x.st)[o.slot|0];if(m)k3dEnter(m)}if(o.spin)k3dSpin('diag');
+    if(o.station&&k3dOk()&&!K3D.mode){const s=(C3.st||[]).find(t=>t.k===o.station);if(s)c3Go(s)}if(o.zurueck){if(K3D.mode==='slot')k3dExit(false);else if(K3D.mode==='holo')k3dAct('hback')}}catch(e){return{fehler:String(e&&e.message||e)}}
+  const W=typeof CH!=='undefined'&&CH.cur,R=W&&W.k3d,ri=typeof C3!=='undefined'&&C3.R&&C3.R.info;
+  return{aktiv:!K3D.off&&!K3D.dead,alt:K3D.off,halle:W?W.k:null,maschinen:R?R.ms.length:0,spielbar:R?R.ms.filter(m=>m.st).length:0,glbErsetzt:R?R.hidden:0,glbRestteile:W?W.k3dMiss||0:0,glbAutomaten:W&&W.L?W.L.slot.length:0,roulette3d:!!(R&&R.wheel),
+    modus:K3D.mode,automat:K3D.mach?K3D.mach.M.n:null,station:K3D.holo?K3D.holo.tab:null,dreht:!!K3D.anim,kamera:+K3D.cb.toFixed(2),drawCalls:ri?ri.render.calls:null,dreiecke:ri?ri.render.triangles:null,texturen:ri?ri.memory.textures:null,geometrien:ri?ri.memory.geometries:null,
+    bewegungReduziert:k3dRM(),fehler:K3D.err,letzterFehler:K3D.errMsg}};
 
 /* ---------- Version ---------- */
 window.VEILORA_VERSION='1.0.0';try{const _vi=STG_VIEW.info;STG_VIEW.info=function(){return _vi.apply(this,arguments)+'<p class="note stgN" style="text-align:center;opacity:.7">Version 1.0.0</p>'}}catch(e){}
