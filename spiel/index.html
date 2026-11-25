@@ -22446,6 +22446,9 @@ function vtrStart(){try{const q=location.search;if(/[?&](trailer=aus|musik=aus)\
 try{const _vSI=storyIntro;storyIntro=function(){if(VTR.on){VTR.nach=true;return}return _vSI.apply(this,arguments)}}catch(e){}
 setTimeout(vtrStart,0);
 try{const _vw2=window.__vlWow;window.__vlWow=function(){const r=_vw2?_vw2.apply(this,arguments):{};try{r.trailer={an:VTR.on,wartet:VTR.nach}}catch(e){}return r}}catch(e){}
+/* Im Kampf nur der Beat: die einzelnen Kill-Ansagen sind aus demselben Song geschnitten (mit Musik) – solange der Beat läuft, schweigen sie (alte Sprachausgabe bleibt ebenfalls still) */
+function kbeatLaeuft(){try{return !!(KBEAT.a&&!KBEAT.a.paused&&KBEAT.v>0.01)}catch(e){return false}}
+try{const _kSay=ansSay;ansSay=function(){if(kbeatLaeuft())return false;return _kSay.apply(this,arguments)}}catch(e){}
 
 /* ---------- Early Access „App“ (Modul app) ---------- */
 /* 1.0 Early Access: kostenlos, keine Werbung, kein Werbenetzwerk, kein Tracking.
