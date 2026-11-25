@@ -23774,6 +23774,131 @@ const SHAGOLD={bg:'linear-gradient(180deg,#ffe08a 0%,#f2b84b 55%,#d98f26 100%)',
 function shaGold(){try{if(!document.body.classList.contains('sha'))return;document.querySelectorAll('.n9RealB').forEach(b=>{const s=b.style;s.setProperty('background',SHAGOLD.bg,'important');s.setProperty('color','#1d1204','important');s.setProperty('border','1px solid rgba(255,230,150,.9)','important');s.setProperty('box-shadow','inset 0 0 0 1px rgba(120,70,10,.5),0 6px 18px rgba(242,184,75,.35)','important');s.setProperty('text-shadow','none','important');b.querySelectorAll('.pgCur').forEach(c=>{c.style.setProperty('background','rgba(29,18,4,.18)','important');c.style.setProperty('color','#1d1204','important')});SHAGOLD.n++})}catch(e){}}
 try{const _sg=renderShop;renderShop=function(){const r=_sg.apply(this,arguments);shaGold();return r}}catch(e){}
 
+/* ---------- Tempo (tempo): adaptive Bildrate im Flug · Rückfall: ?tempo=aus · fest: ?tempo=0..3 · Diagnose window.__vlTempo() ---------- */
+// Misst im Flug (state 'play') die echte Bildzeit (Abstand der rAF-Zeitstempel) in 1-s-Fenstern. Handy: unter ~50 fps (Fenster > 20 ms) zwei Fenster
+// in Folge → eine Stufe runter; über ~57 fps (< 17,6 ms) für 8 Fenster → eine Stufe hoch (Wartezeit verdoppelt sich, wenn es kurz danach wieder kippt).
+// Wirkungskontrolle: bringt eine Stufe keinen Gewinn (< 5 %) oder sieht es nach fester 30-fps-Kappe aus (Stromsparmodus), wird zurückgeschaltet und gesperrt.
+// Desktop: erst unter ~40 fps, höchstens Stufe 2 – ein flüssiger Desktop bleibt exakt unverändert. Spiellogik, Trefferzonen, dt bleiben unberührt.
+// Stufe 1 „leicht“ : Auflösung ×0,85 · Hintergrund (Map+Nebel+Kulisse) jedes 2. Bild aus Zwischenspeicher · Filmkorn ohne Mischmodus (overlay)
+// Stufe 2 „mittel“ : Auflösung ×0,72 · Partikel ≤ 360 · Zusatz-Effekte aus (fxeLow) · 3D-Ebene 70 % · kein shadowBlur auf der Spiel-Canvas · HDR-Filter aus
+// Stufe 3 „stark“  : Auflösung ×0,6 (nie unter 1) · Partikel ≤ 240 · Hintergrund jedes 3. Bild · Filmkorn aus
+// Immer im Flug: appLeer (400-ms-Takt, liest offsetParent → erzwingt Layout) pausiert.
+(function(){
+const Q=(()=>{try{return String((location&&location.search)||'')}catch(e){return''}})();
+const AUS=/(?:^|[?&])tempo=aus(?:&|$)/i.test(Q);
+if(AUS){window.__vlTempo=function(){return{an:false,aus:true}};return}
+const FIX=(()=>{const m=/(?:^|[?&])tempo=(?:stufe)?([0-3])(?:&|$)/i.exec(Q);return m?+m[1]:null})();
+const MOBIL=(()=>{try{const n=navigator,ua=n.userAgent||'';if(/iPhone|iPad|iPod|Android|Mobile/i.test(ua))return true;if(/Macintosh/.test(ua)&&(n.maxTouchPoints||0)>1)return true;
+  return !!(window.matchMedia&&matchMedia('(pointer:coarse)').matches&&(n.maxTouchPoints||0)>0)}catch(e){return false}})();
+const ST=[{n:'voll',dpr:1,part:1e9,bg:1,korn:0,spar:0},{n:'leicht',dpr:.85,part:520,bg:2,korn:1,spar:0},{n:'mittel',dpr:.72,part:360,bg:2,korn:1,spar:1},{n:'stark',dpr:.6,part:240,bg:3,korn:2,spar:1}];
+const CFG=MOBIL?{ab:20,auf:17.6,max:3}:{ab:25,auf:18.5,max:2};
+const pnow=()=>{try{return performance.now()}catch(e){return Date.now()}};
+const S={stufe:0,merk:0,fix:FIX,inLauf:false,lt:0,playMs:0,ema:16.7,arb:0,fen:{d:0,n:0,s:0,q:0},hist:[],ueber:0,unter:0,warte:8,lock:0,lockGrund:'',
+  probe:null,ohne:0,ohneStart:0,letzterAuf:-1e9,letzterAb:-1e9,ruck:0,dprAkt:false,f3:false,blurAus:false,haken:false,
+  cache:{cv:null,g:null,ok:false,n:0,w:0,h:0,d:0,treffer:0,neu:0},log:[],fehler:0,letzterFehler:''};
+const err=e=>{S.fehler++;S.letzterFehler=String(e&&e.message||e)};
+const inLauf=()=>{try{return !!run&&(state==='play'||state==='pick'||state==='pause'||state==='dying')}catch(e){return false}};
+const maxStufe=()=>S.fix!==null?3:CFG.max;
+
+/* CSS: Filmkorn und HDR-Filter je Stufe (Klassen wechseln nur beim Stufenwechsel → keine Stil-Neuberechnung pro Bild) */
+try{const el=document.createElement('style');el.id='tpoCss';
+  el.textContent='html.tpoK1 body .vlGrain::before{mix-blend-mode:normal!important;opacity:calc(var(--vlgA,.06)*.35)!important}'+
+    'html.tpoK2 body .vlGrain{display:none!important}html.tpoH body #screen canvas{filter:none!important}';
+  (document.head||document.documentElement).appendChild(el)}catch(e){err(e)}
+
+/* Auflösung: Basis = was das Spiel ohne Tempo hätte (stgDpr bzw. Schärfe-Modus) */
+function basis(){try{if(save&&save.set&&save.set.sharp)return vlDpr(2);return Math.min(window.devicePixelRatio||1,stgDprCap())}catch(e){return dpr||1}}
+function dprZiel(k){const b=basis();return b<=1?b:Math.max(1,Math.round(b*k.dpr*100)/100)}
+function dprSetz(d){if(!W||!H||Math.abs(dpr-d)<.01)return;dpr=d;cv.width=W*d;cv.height=H*d;ctx.setTransform(d,0,0,d,0,0);S.cache.ok=false}
+function dprPruefen(){const k=S.inLauf?ST[S.stufe]:ST[0];
+  if(k.dpr<1){dprSetz(dprZiel(k));S.dprAkt=true}
+  else if(S.dprAkt){S.dprAkt=false;try{stgDpr()}catch(e){dprSetz(basis())}S.cache.ok=false}}
+
+/* shadowBlur auf der Spiel-Canvas: in Stufe 2+ im Flug auf 0 (Text-Leuchten an Schadens-Texten/Banner; Safari rechnet Schatten teuer) */
+function blurHaken(){if(S.haken)return;try{const pd=Object.getOwnPropertyDescriptor(CanvasRenderingContext2D.prototype,'shadowBlur');if(!pd||!pd.set||!pd.get)return;
+  Object.defineProperty(ctx,'shadowBlur',{configurable:true,enumerable:true,get(){return pd.get.call(this)},set(v){pd.set.call(this,S.blurAus&&S.inLauf?0:v)}});S.haken=true}catch(e){err(e)}}
+
+function anwenden(){const k=S.inLauf?ST[S.stufe]:ST[0];
+  try{const c=document.documentElement.classList;c.toggle('tpoK1',k.korn===1);c.toggle('tpoK2',k.korn===2);c.toggle('tpoH',!!k.spar)}catch(e){err(e)}
+  try{if(typeof f3S==='object'&&f3S){if(k.spar&&!f3S.lo){f3S.lo=true;S.f3=true}else if(!k.spar&&S.f3){f3S.lo=false;S.f3=false}}}catch(e){err(e)}
+  S.blurAus=!!k.spar;if(S.blurAus)blurHaken();
+  if(k.bg<=1||!S.inLauf){const C=S.cache;C.ok=false;if(!S.inLauf&&C.cv){C.cv.width=C.cv.height=0;C.w=C.h=0}}
+  try{dprPruefen()}catch(e){err(e)}}
+function setStufe(n,grund,ms){n=Math.max(0,Math.min(maxStufe(),n|0));if(n===S.stufe)return;
+  S.log.push({sek:Math.round(pnow()/1000),von:S.stufe,nach:n,grund,ms:ms==null?null:+(+ms).toFixed(1)});if(S.log.length>16)S.log.shift();
+  S.stufe=n;anwenden()}
+
+/* Regelung je 1-s-Fenster */
+function fensterEnde(avg,sd){S.hist.push(+avg.toFixed(2));if(S.hist.length>20)S.hist.shift();if(S.fix!==null)return;
+  const now=pnow();
+  if(S.probe){const p=S.probe;p.n++;if(p.n===1)return;/* erstes Fenster nach dem Wechsel: Einschwingen */
+    S.probe=null;const kappe=avg>31&&avg<36&&sd<2.5;
+    if(kappe||avg>p.vor*.95){if(!S.ohne)S.ohneStart=p.von;S.ohne++;
+      if(kappe||S.ohne>=2){const z=S.ohneStart;S.ohne=0;S.ueber=S.unter=0;S.lock=now+(kappe?300000:60000);S.lockGrund=kappe?'30-fps-Kappe (Stromsparen/Bildschirm)':'Stufe brachte keinen Gewinn';
+        setStufe(z,kappe?'zurueck: 30-fps-Kappe':'zurueck: kein Gewinn',avg);return}}
+    else S.ohne=0}
+  if(avg>CFG.ab){S.ueber++;S.unter=0}else if(avg<CFG.auf){S.unter++;S.ueber=0}else{S.ueber=0;S.unter=0}
+  if(now-S.letzterAb>120000)S.warte=8;
+  if(S.ueber>=2&&S.stufe<maxStufe()&&now>=S.lock){const h=S.hist,vor=(h[h.length-1]+h[h.length-2])/2;
+    if(now-S.letzterAuf<15000)S.warte=Math.min(64,S.warte*2);/* kippt kurz nach dem Hochschalten → länger warten */
+    S.letzterAb=now;S.ueber=0;S.probe={von:S.stufe,vor,n:0};setStufe(S.stufe+1,'runter',avg);return}
+  if(S.unter>=S.warte&&S.stufe>0){S.unter=0;S.letzterAuf=now;S.ohne=0;setStufe(S.stufe-1,'hoch',avg)}}
+
+function vor(t){const L=inLauf();
+  if(L!==S.inLauf){S.inLauf=L;S.lt=0;S.playMs=0;S.fen={d:0,n:0,s:0,q:0};S.probe=null;S.ohne=0;S.ueber=S.unter=0;
+    if(L){S.stufe=S.fix!==null?S.fix:Math.max(0,S.merk-1);if(S.stufe)S.log.push({sek:Math.round(pnow()/1000),von:0,nach:S.stufe,grund:'start (gelernt)',ms:null})}
+    else{S.merk=S.stufe}
+    anwenden()}
+  let play=false;try{play=L&&state==='play'&&!document.hidden}catch(e){}
+  if(play&&typeof t==='number'){if(S.lt){const d=t-S.lt;
+      if(d>250)S.ruck++;
+      else if(d>0){S.ema=S.ema*.92+d*.08;S.playMs+=d;
+        if(S.playMs>1500){const F=S.fen;F.d+=d;F.n++;F.s+=d;F.q+=d*d;
+          if(F.d>=1000){const a=F.s/F.n,sd=Math.sqrt(Math.max(0,F.q/F.n-a*a));S.fen={d:0,n:0,s:0,q:0};fensterEnde(a,sd)}}}}
+    S.lt=t}else S.lt=0;
+  if(L)dprPruefen()}
+function nach(){if(!S.inLauf||!ST[S.stufe].spar)return;try{if(state==='play')fxeLow=true}catch(e){}}/* Spawns im nächsten update sparen; draw misst fxeLow selbst neu */
+
+/* 1) Takt-Hülle */
+{const _l=loop;loop=function(t){const a=pnow();try{vor(t)}catch(e){err(e)}
+  try{return _l.apply(this,arguments)}finally{S.arb=S.arb*.95+(pnow()-a)*.05;try{nach()}catch(e){err(e)}}}}
+
+/* 2) Partikel-Obergrenze je Stufe (wirkt auf den Beschnitt im Takt und auf fl2Low) */
+{const _p=stgPartCap;stgPartCap=function(){const c=_p.apply(this,arguments);try{if(S.inLauf){const k=ST[S.stufe];if(k.part<c)return k.part}}catch(e){}return c}}
+
+/* 3) Hintergrund-Zwischenspeicher: Map+Nebel+Kulisse nur jedes 2./3. Bild neu (bewegt sich mit 2–14 px/s – nicht sichtbar).
+      Nur bei reiner Grundtransformation (kein Wackeln/Zoom/Rückstoß), sonst wird normal gezeichnet. */
+{const _v=vmBg;vmBg=function(){let k;try{k=S.inLauf&&state==='play'?ST[S.stufe]:null}catch(e){k=null}
+  if(!k||k.bg<=1||!ctx.getTransform)return _v.apply(this,arguments);
+  const C=S.cache;let rein=false;
+  try{const m=ctx.getTransform();rein=Math.abs(m.a-dpr)<1e-3&&Math.abs(m.d-dpr)<1e-3&&Math.abs(m.b)<1e-6&&Math.abs(m.c)<1e-6&&Math.abs(m.e)<1e-3&&Math.abs(m.f)<1e-3}catch(e){rein=false}
+  if(!rein){C.ok=false;return _v.apply(this,arguments)}
+  if(C.ok&&C.n<k.bg-1&&C.w===cv.width&&C.h===cv.height&&Math.abs(C.d-dpr)<1e-3){
+    try{C.n++;ctx.save();ctx.setTransform(1,0,0,1,0,0);ctx.globalAlpha=1;ctx.globalCompositeOperation='source-over';ctx.drawImage(C.cv,0,0);ctx.restore();C.treffer++;return true}
+    catch(e){err(e);C.ok=false;try{ctx.restore()}catch(_){}}}
+  const r=_v.apply(this,arguments);
+  if(r){try{if(!C.cv){C.cv=document.createElement('canvas');C.g=C.cv.getContext('2d')}
+      if(C.cv.width!==cv.width||C.cv.height!==cv.height){C.cv.width=cv.width;C.cv.height=cv.height}
+      C.g.globalCompositeOperation='copy';C.g.globalAlpha=1;C.g.drawImage(cv,0,0);C.g.globalCompositeOperation='source-over';
+      C.ok=true;C.n=0;C.w=cv.width;C.h=cv.height;C.d=dpr;C.neu++}catch(e){err(e);C.ok=false}}
+  else C.ok=false;
+  return r}}
+
+/* 4) Fester Gewinn: appLeer (Shop-Abschnitte, liest offsetParent/getClientRects) im Flug aussetzen – Shop ist dort nicht sichtbar */
+try{if(typeof appLeer==='function'){const _a=appLeer;appLeer=function(){try{if(state==='play')return}catch(e){}return _a.apply(this,arguments)}}}catch(e){}
+
+/* Diagnose */
+window.__vlTempo=function(){const k=ST[S.stufe]||ST[0],C=S.cache;let pc=null,f3=null,lo=null;try{pc=stgPartCap()}catch(e){}
+  try{if(typeof f3S==='object'&&f3S)f3={an:!!f3S.act,lo:!!f3S.lo,ms:+(+f3S.ms||0).toFixed(2)}}catch(e){}try{lo=!!fxeLow}catch(e){}
+  return{an:true,mobil:MOBIL,fest:S.fix,imFlug:S.inLauf,stufe:S.stufe,stufeName:k.n,msFrame:+S.ema.toFixed(2),fps:+(1000/S.ema).toFixed(1),msArbeitJS:+S.arb.toFixed(2),
+    fenster:S.hist.slice(-8),dpr:+(+dpr).toFixed(3),dprBasis:+basis().toFixed(3),geraetDpr:window.devicePixelRatio||1,canvas:cv.width+'x'+cv.height,
+    partikel:parts.length,partikelGrenze:pc,hintergrund:{jedesNteBild:S.inLauf?k.bg:1,ausSpeicher:C.treffer,neuGezeichnet:C.neu},
+    spar:{fxeLow:lo,ohneSchatten:S.blurAus&&S.inLauf,korn:['normal','ohne Mischmodus','aus'][S.inLauf?k.korn:0],hdrFilterAus:!!(S.inLauf&&k.spar)},f3d:f3,
+    schwellen:{runterAbMs:CFG.ab,hochUnterMs:CFG.auf,maxStufe:maxStufe(),hochNachFenstern:S.warte},sperreSek:Math.max(0,Math.round((S.lock-pnow())/1000)),sperrGrund:S.lockGrund,
+    ruckler:S.ruck,wechsel:S.log.slice(),fehler:S.fehler,letzterFehler:S.letzterFehler}};
+window.__vlTempo.stufe=function(n){S.fix=n==null?null:Math.max(0,Math.min(3,n|0));if(S.fix!==null&&S.inLauf)setStufe(S.fix,'manuell');return window.__vlTempo()};
+})();
+
 /* ---------- Version ---------- */
 window.VEILORA_VERSION='1.0.0';try{const _vi=STG_VIEW.info;STG_VIEW.info=function(){return _vi.apply(this,arguments)+'<p class="note stgN" style="text-align:center;opacity:.7">Version 1.0.0</p>'}}catch(e){}
 /* ---------- Release: Testmodus aus ---------- */
