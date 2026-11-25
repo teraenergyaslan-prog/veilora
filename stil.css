@@ -1,0 +1,9 @@
+:root{--nacht:#05070f;--nacht2:#0d1430;--gold:#ffb347;--eis:#9fe8ff;--text:#e8eefc;--grau:#9aa7c2}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 70% 0%,#1d2b5e 0%,var(--nacht2) 35%,var(--nacht) 80%);color:var(--text);font:17px/1.65 "Segoe UI",system-ui,-apple-system,sans-serif;padding:24px 16px;min-height:100vh}
+main{max-width:780px;margin:0 auto;background:rgba(10,16,36,.86);border:1px solid rgba(255,179,71,.45);border-radius:18px;padding:28px 26px;box-shadow:0 10px 50px rgba(0,0,0,.55)}
+header{text-align:center;margin-bottom:8px}header .ober{letter-spacing:.32em;font-size:13px;color:var(--gold);text-transform:uppercase;font-weight:700}
+h1{font-size:30px;margin:.2em 0 .1em;color:#fff;letter-spacing:.04em}h2{font-size:20px;color:var(--eis);margin-top:1.6em;border-bottom:1px solid rgba(159,232,255,.25);padding-bottom:.2em}
+a{color:var(--gold)}nav{text-align:center;margin:22px 0 6px;font-size:15px}nav a{margin:0 10px}
+.linie{width:120px;height:2px;margin:10px auto 16px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}footer{text-align:center;color:var(--grau);font-size:13px;margin-top:22px}
+ul{padding-left:1.2em}li{margin:.3em 0}.karte{background:rgba(255,255,255,.05);border:1px solid rgba(255,179,71,.3);border-radius:12px;padding:12px 16px;margin:12px 0}
+.ea{display:inline-block;background:linear-gradient(90deg,#2a7fff,#7a4aff);color:#fff;border-radius:99px;padding:2px 12px;font-size:13px;font-weight:700;letter-spacing:.08em}
