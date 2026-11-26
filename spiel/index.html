@@ -22675,7 +22675,17 @@ window.__vlLobby=function(){try{const ov=$('startOv'),r=e=>{if(!e)return null;co
 const LPRUHE={tempo:.35};
 function lpRuheAn(){try{return !/[?&]lobby=alt\b/.test(location.search)&&state==='start'&&!$('startOv').classList.contains('hide')}catch(e){return false}}
 try{const _lpL=lobLoop;lobLoop=function(t){if(lpRuheAn()){lobShots.length=0;lobBoost=0;lobNextBoost=99;const v=lobT,r=_lpL.apply(this,arguments);const dt=lobT-v;if(dt>0)lobT=v+dt*LPRUHE.tempo;return r}return _lpL.apply(this,arguments)}}catch(e){}
-try{const _lpD=l3Draw;l3Draw=function(d,bo,bank,dt,w,h){if(lpRuheAn())return _lpD.call(this,d,0,bank*.4,(dt||0)*LPRUHE.tempo,w,h);return _lpD.apply(this,arguments)}}catch(e){}
+/* Flug-Gefühl wie im Video: kräftiges blaues Plasma-Triebwerk (Schub-Wert), langsames Neigen (Roll) und Schweben; Farben der Düsen werden nur in der Lobby gefärbt und danach zurückgesetzt */
+const LPFLUG={schub:1.35,roll:.2,tex:null,n:0};
+function lpFlugTex(){if(LPFLUG.tex)return LPFLUG.tex;const c=document.createElement('canvas');c.width=c.height=64;const g=c.getContext('2d'),r=g.createRadialGradient(32,32,0,32,32,32);
+  r.addColorStop(0,'rgba(170,225,255,1)');r.addColorStop(.2,'rgba(60,160,255,.95)');r.addColorStop(.5,'rgba(20,90,255,.65)');r.addColorStop(.78,'rgba(10,50,235,.25)');r.addColorStop(1,'rgba(5,30,200,0)');g.fillStyle=r;g.fillRect(0,0,64,64);
+  const t=new THREE.CanvasTexture(c);LPFLUG.tex=t;return t}
+function lpFlugFarbe(an){try{const S=l3S();if(!S||!S.ls)return;const ms=[];for(const[sp]of(S.ls.gl||[]))ms.push(sp.material);for(const[f]of(S.ls.fl||[]))ms.push(f.material);
+  for(const m of ms){const u=m.userData=m.userData||{};if(an){if(!u.lpf){u.lpf={map:m.map,col:m.color.getHex()};m.map=lpFlugTex();m.color.setHex(0xffffff);m.needsUpdate=true;LPFLUG.n++}}
+    else if(u.lpf){m.map=u.lpf.map;m.color.setHex(u.lpf.col);m.needsUpdate=true;u.lpf=null}}}catch(e){}}
+try{const _lpD=l3Draw;l3Draw=function(d,bo,bank,dt,w,h){if(lpRuheAn()){const t=performance.now()/1000;lpFlugFarbe(true);
+    return _lpD.call(this,d,LPFLUG.schub*(1+Math.sin(t*.8)*.08),bank*.4+LPFLUG.roll*Math.sin(t*.37)+.06,(dt||0)*LPRUHE.tempo,w,h)}
+  lpFlugFarbe(false);return _lpD.apply(this,arguments)}}catch(e){}
 try{const _lpS=Sound.laser;Sound.laser=function(){if(lpRuheAn())return;return _lpS.apply(this,arguments)}}catch(e){}
 try{const _lpV=vib;vib=function(){if(lpRuheAn())return;return _lpV.apply(this,arguments)}}catch(e){}
 
