@@ -22456,7 +22456,7 @@ const KBEAT={a:null,an:false,fehler:0,iv:0,ziel:0,v:0,n:0};
 function kbeatAus(){return /[?&](musik=aus|beat=aus)\b/.test(location.search)}
 function kbeatTick(){try{if(kbeatAus()||KBEAT.fehler)return;let fl=false,pz=false;try{fl=state==='play'||state==='dying'||state==='revive'||state==='pick';pz=state==='pause'}catch(e){}
   let eigen=false;try{eigen=!!(MyMusic.on&&MyMusic.tracks.length)}catch(e){}
-  const vol=eigen?0:wowVol();let ziel=0;if(fl)ziel=vol;else if(pz)ziel=vol*.3;
+  const vol=eigen?0:wowVol();let ziel=0;if(fl)ziel=vol;else if(pz){ziel=0;try{if(KBEAT.a&&!KBEAT.a.paused){KBEAT.a.pause();KBEAT.an=false}KBEAT.v=0}catch(e){}return}
   try{if(ziel>0&&typeof ANS==='object'&&ANS.busy)ziel*=.55}catch(e){}
   if(ziel>0&&!KBEAT.a){const a=new Audio('musik/mus_kampf.mp3');a.preload='auto';a.loop=false;a.volume=0;a.onerror=()=>{KBEAT.fehler=1;try{Sound.own(false)}catch(e){}};
     a.addEventListener('timeupdate',()=>{try{if(a.duration&&a.currentTime>a.duration-1.25){a.currentTime=0.05;KBEAT.n++}}catch(e){}});a.onended=()=>{try{a.currentTime=0;a.play().catch(()=>{})}catch(e){}};KBEAT.a=a}
@@ -23834,7 +23834,7 @@ if(AUS){window.__vlTempo=function(){return{an:false,aus:true}};return}
 const FIX=(()=>{const m=/(?:^|[?&])tempo=(?:stufe)?([0-3])(?:&|$)/i.exec(Q);return m?+m[1]:null})();
 const MOBIL=(()=>{try{const n=navigator,ua=n.userAgent||'';if(/iPhone|iPad|iPod|Android|Mobile/i.test(ua))return true;if(/Macintosh/.test(ua)&&(n.maxTouchPoints||0)>1)return true;
   return !!(window.matchMedia&&matchMedia('(pointer:coarse)').matches&&(n.maxTouchPoints||0)>0)}catch(e){return false}})();
-const ST=[{n:'voll',dpr:1,part:1e9,bg:1,korn:0,spar:0},{n:'leicht',dpr:.85,part:520,bg:2,korn:1,spar:0},{n:'mittel',dpr:.72,part:360,bg:2,korn:1,spar:1},{n:'stark',dpr:.6,part:240,bg:3,korn:2,spar:1}];
+const ST=[{n:'voll',dpr:1,part:1e9,bg:1,korn:0,spar:0},{n:'leicht',dpr:1,part:520,bg:1,korn:1,spar:0},{n:'mittel',dpr:.85,part:360,bg:1,korn:1,spar:1},{n:'stark',dpr:.72,part:240,bg:1,korn:2,spar:1}];
 const CFG=MOBIL?{ab:20,auf:17.6,max:3}:{ab:25,auf:18.5,max:2};
 const pnow=()=>{try{return performance.now()}catch(e){return Date.now()}};
 const S={stufe:0,merk:0,fix:FIX,inLauf:false,lt:0,playMs:0,ema:16.7,arb:0,fen:{d:0,n:0,s:0,q:0},hist:[],ueber:0,unter:0,warte:8,lock:0,lockGrund:'',
