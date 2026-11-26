@@ -1,0 +1,6 @@
+<!doctype html><html lang="de"><head><meta charset="utf-8"><title>VEILORA alles frei</title><meta name="viewport" content="width=device-width,initial-scale=1">
+<style>html,body{margin:0;height:100%;background:#05070d;color:#cfe8ff;font:600 16px system-ui,sans-serif;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;box-sizing:border-box}button{margin:8px;padding:14px 22px;border-radius:12px;border:1px solid #ffd77a;background:#1a2540;color:#ffd77a;font:700 15px system-ui,sans-serif}</style></head>
+<body><div><div id="t">Schalter für dieses Gerät: Alle Spielmodi sofort freigeben (Spielstand bleibt unverändert).</div>
+<button onclick="s(1)">Alles freigeben</button><button onclick="s(0)">Wieder streng (Schritt für Schritt)</button></div>
+<script>function s(v){try{if(v)localStorage.setItem('sw_alles_frei','1');else localStorage.removeItem('sw_alles_frei');
+document.getElementById('t').textContent=v?'Alles freigegeben. Das Spiel startet …':'Wieder Schritt für Schritt. Das Spiel startet …';setTimeout(function(){location.replace('./')},900)}catch(e){document.getElementById('t').textContent='Fehler: '+e.message}}</script></body></html>
