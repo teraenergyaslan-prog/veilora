@@ -23052,7 +23052,7 @@ try{const _fc=STG_VIEW.ctl;STG_VIEW.ctl=function(){let h=_fc.apply(this,argument
    Start: nur Kampagne/SPIELEN, Einstellungen, Profil. Bestand: Schlüssel erfüllt oder schon benutzt → offen, ein Logbuch-Funkspruch.
    ?frei=aus → Modul inaktiv (alles offen wie heute). Diagnose: window.__vlFrei(). Ab 5 Fehlern schaltet sich das Modul ab (fail-open). Speicher: save.unl (v2) */
 const FSX={aus:false,err:0,errMsg:'',besuch:0,vis:false,visT:0,letzt:-1,ruhe:0,eigen:0,flug:0,lekt:null};
-try{FSX.aus=/[?&]frei=aus\b/i.test(location.search)}catch(e){}
+try{FSX.aus=/[?&]frei=aus\b/i.test(location.search)||localStorage.getItem('sw_alles_frei')==='1'}catch(e){}
 const fsxErr=e=>{FSX.err++;FSX.errMsg=String(e&&e.message||e).slice(0,140);if(FSX.err<=3)try{console.warn('frei',e)}catch(_){}};
 const fsxAn=()=>!FSX.aus&&FSX.err<5;
 const fsxK=()=>{try{return (save.camp&&save.camp.lv)||1}catch(e){return 1}};
